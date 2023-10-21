@@ -1,0 +1,732 @@
+2023-09-08 22:36:41:822 grammar LogManager.java:25 before: (LEXER_GRAMMAR SwiftLexer (RULES (RULE INT (BLOCK (ALT 'Int'))) (RULE FLOAT (BLOCK (ALT 'Float'))) (RULE BOOL (BLOCK (ALT 'Bool'))) (RULE STR (BLOCK (ALT 'String'))) (RULE TRU (BLOCK (ALT 'true'))) (RULE FAL (BLOCK (ALT 'false'))) (RULE PRINT (BLOCK (ALT 'print'))) (RULE IF (BLOCK (ALT 'if'))) (RULE ELSE (BLOCK (ALT 'else'))) (RULE WHILE (BLOCK (ALT 'while'))) (RULE FOR (BLOCK (ALT 'for'))) (RULE IN (BLOCK (ALT 'in'))) (RULE VAR (BLOCK (ALT 'var'))) (RULE LET (BLOCK (ALT 'let'))) (RULE NIL (BLOCK (ALT 'nil'))) (RULE BREAK (BLOCK (ALT 'break'))) (RULE CONTINUE (BLOCK (ALT 'continue'))) (RULE APPEND (BLOCK (ALT 'append'))) (RULE REMOVELAST (BLOCK (ALT 'removeLast'))) (RULE REMOVE (BLOCK (ALT 'remove'))) (RULE AT (BLOCK (ALT 'at'))) (RULE ISEMPTY (BLOCK (ALT 'isEmpty'))) (RULE COUNT (BLOCK (ALT 'count'))) (RULE ARRAY (BLOCK (ALT 'array'))) (RULE RETURN (BLOCK (ALT 'return'))) (RULE FUNC (BLOCK (ALT 'func'))) (RULE STRUCT (BLOCK (ALT 'struct'))) (RULE GUARD (BLOCK (ALT 'guard'))) (RULE NUMBER (BLOCK (ALT (+ (BLOCK (ALT [0-9]))) (? (BLOCK (ALT '.' (+ (BLOCK (ALT [0-9]))))))))) (RULE STRING (BLOCK (ALT '"' (* (BLOCK (ALT (~ (SET ["]))))) '"'))) (RULE ID (BLOCK (ALT (BLOCK (ALT [a-zA-Z_])) (* (BLOCK (ALT [a-zA-Z0-9_])))))) (RULE DIFE (BLOCK (ALT '!='))) (RULE IG_IG (BLOCK (ALT '=='))) (RULE NOT (BLOCK (ALT '!'))) (RULE OR (BLOCK (ALT '||'))) (RULE AND (BLOCK (ALT '&&'))) (RULE IGUAL (BLOCK (ALT '='))) (RULE MAYIG (BLOCK (ALT '>='))) (RULE MENIG (BLOCK (ALT '<='))) (RULE MAYOR (BLOCK (ALT '>'))) (RULE MENOR (BLOCK (ALT '<'))) (RULE MULT (BLOCK (ALT '*'))) (RULE DIV (BLOCK (ALT '/'))) (RULE SUM (BLOCK (ALT '+'))) (RULE RES (BLOCK (ALT '-'))) (RULE MOD (BLOCK (ALT '%'))) (RULE PAR_IZQ (BLOCK (ALT '('))) (RULE PAR_DER (BLOCK (ALT ')'))) (RULE LLAVE_IZQ (BLOCK (ALT '{'))) (RULE LLAVE_DER (BLOCK (ALT '}'))) (RULE DOSPUNTOS (BLOCK (ALT ':'))) (RULE COR_IZQ (BLOCK (ALT '['))) (RULE COR_DER (BLOCK (ALT ']'))) (RULE COMA (BLOCK (ALT ','))) (RULE CIERRAPREGUNTA (BLOCK (ALT '?'))) (RULE PUNTOCOMA (BLOCK (ALT ';'))) (RULE PUNTO (BLOCK (ALT '.'))) (RULE FLECHA (BLOCK (ALT '->'))) (RULE WHITESPACE (BLOCK (LEXER_ALT_ACTION (ALT (+ (BLOCK (ALT [ \\\r\n\t])))) skip))) (RULE COMMENT (BLOCK (LEXER_ALT_ACTION (ALT '/*' (* (BLOCK (ALT .))) '*/') skip))) (RULE LINE_COMMENT (BLOCK (LEXER_ALT_ACTION (ALT '//' (* (BLOCK (ALT (~ (SET [\r\n])))))) skip))) (RULE ESC_SEQ (RULEMODIFIERS fragment) (BLOCK (ALT '\\' (BLOCK (ALT '\\') (ALT '@') (ALT '[') (ALT ']') (ALT '.') (ALT '#') (ALT '+') (ALT '-') (ALT '!') (ALT ':') (ALT ' ')))))))
+2023-09-08 22:36:41:864 grammar LogManager.java:25 after: (LEXER_GRAMMAR SwiftLexer (RULES (RULE INT (BLOCK (ALT 'Int'))) (RULE FLOAT (BLOCK (ALT 'Float'))) (RULE BOOL (BLOCK (ALT 'Bool'))) (RULE STR (BLOCK (ALT 'String'))) (RULE TRU (BLOCK (ALT 'true'))) (RULE FAL (BLOCK (ALT 'false'))) (RULE PRINT (BLOCK (ALT 'print'))) (RULE IF (BLOCK (ALT 'if'))) (RULE ELSE (BLOCK (ALT 'else'))) (RULE WHILE (BLOCK (ALT 'while'))) (RULE FOR (BLOCK (ALT 'for'))) (RULE IN (BLOCK (ALT 'in'))) (RULE VAR (BLOCK (ALT 'var'))) (RULE LET (BLOCK (ALT 'let'))) (RULE NIL (BLOCK (ALT 'nil'))) (RULE BREAK (BLOCK (ALT 'break'))) (RULE CONTINUE (BLOCK (ALT 'continue'))) (RULE APPEND (BLOCK (ALT 'append'))) (RULE REMOVELAST (BLOCK (ALT 'removeLast'))) (RULE REMOVE (BLOCK (ALT 'remove'))) (RULE AT (BLOCK (ALT 'at'))) (RULE ISEMPTY (BLOCK (ALT 'isEmpty'))) (RULE COUNT (BLOCK (ALT 'count'))) (RULE ARRAY (BLOCK (ALT 'array'))) (RULE RETURN (BLOCK (ALT 'return'))) (RULE FUNC (BLOCK (ALT 'func'))) (RULE STRUCT (BLOCK (ALT 'struct'))) (RULE GUARD (BLOCK (ALT 'guard'))) (RULE NUMBER (BLOCK (ALT (+ (BLOCK (ALT [0-9]))) (? (BLOCK (ALT '.' (+ (BLOCK (ALT [0-9]))))))))) (RULE STRING (BLOCK (ALT '"' (* (BLOCK (ALT (~ (SET ["]))))) '"'))) (RULE ID (BLOCK (ALT (BLOCK (ALT [a-zA-Z_])) (* (BLOCK (ALT [a-zA-Z0-9_])))))) (RULE DIFE (BLOCK (ALT '!='))) (RULE IG_IG (BLOCK (ALT '=='))) (RULE NOT (BLOCK (ALT '!'))) (RULE OR (BLOCK (ALT '||'))) (RULE AND (BLOCK (ALT '&&'))) (RULE IGUAL (BLOCK (ALT '='))) (RULE MAYIG (BLOCK (ALT '>='))) (RULE MENIG (BLOCK (ALT '<='))) (RULE MAYOR (BLOCK (ALT '>'))) (RULE MENOR (BLOCK (ALT '<'))) (RULE MULT (BLOCK (ALT '*'))) (RULE DIV (BLOCK (ALT '/'))) (RULE SUM (BLOCK (ALT '+'))) (RULE RES (BLOCK (ALT '-'))) (RULE MOD (BLOCK (ALT '%'))) (RULE PAR_IZQ (BLOCK (ALT '('))) (RULE PAR_DER (BLOCK (ALT ')'))) (RULE LLAVE_IZQ (BLOCK (ALT '{'))) (RULE LLAVE_DER (BLOCK (ALT '}'))) (RULE DOSPUNTOS (BLOCK (ALT ':'))) (RULE COR_IZQ (BLOCK (ALT '['))) (RULE COR_DER (BLOCK (ALT ']'))) (RULE COMA (BLOCK (ALT ','))) (RULE CIERRAPREGUNTA (BLOCK (ALT '?'))) (RULE PUNTOCOMA (BLOCK (ALT ';'))) (RULE PUNTO (BLOCK (ALT '.'))) (RULE FLECHA (BLOCK (ALT '->'))) (RULE WHITESPACE (BLOCK (LEXER_ALT_ACTION (ALT (+ (BLOCK (ALT [ \\\r\n\t])))) skip))) (RULE COMMENT (BLOCK (LEXER_ALT_ACTION (ALT '/*' (* (BLOCK (ALT .))) '*/') skip))) (RULE LINE_COMMENT (BLOCK (LEXER_ALT_ACTION (ALT '//' (* (BLOCK (ALT (~ (SET [\r\n])))))) skip))) (RULE ESC_SEQ (RULEMODIFIERS fragment) (BLOCK (ALT '\\' (SET '\\' '@' '[' ']' '.' '#' '+' '-' '!' ':' ' '))))))
+2023-09-08 22:36:42:842 grammar LogManager.java:25 before: (COMBINED_GRAMMAR SwiftGrammar (OPTIONS (= tokenVocab SwiftLexer)) (@ header {
+    import "Proyecto1_OLC2_2S2023_202101648/interfaces"
+    import "Proyecto1_OLC2_2S2023_202101648/Environment"
+    import "Proyecto1_OLC2_2S2023_202101648/expressions"
+    import "Proyecto1_OLC2_2S2023_202101648/instructions"
+    import "strings"
+}) (RULES (RULE s (returns []interface{} code) (BLOCK (ALT block EOF {   
+        $code = $block.blk
+    }))) (RULE block (returns []interface{} blk) (@ init {
+    $blk = []interface{}{}
+    var listInt []IInstructionContext
+  }) (BLOCK (ALT (+ (BLOCK (ALT (+= ins instruction)))) {
+        listInt = localctx.(*BlockContext).GetIns()
+        for _, e := range listInt {
+            $blk = append($blk, e.GetInst())
+        }
+    }))) (RULE instruction (returns interfaces.Instruction inst) (BLOCK (ALT printstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $printstmt.prnt}) (ALT ifstmt { $inst = $ifstmt.ifinst }) (ALT declarationstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $declarationstmt.dec }) (ALT asignationstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $asignationstmt.asig }) (ALT whilestmt { $inst = $whilestmt.whileinst }) (ALT forstmt { $inst = $forstmt.forinst }) (ALT guardstmt { $inst = $guardstmt.gd }) (ALT function {$inst = $function.fun}) (ALT structCreation { $inst = $structCreation.dec }) (ALT callFuncionIns (? (BLOCK (ALT PUNTOCOMA))) {$inst = $callFuncionIns.cf}) (ALT BREAK (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewBreak($BREAK.line, $BREAK.pos)}) (ALT CONTINUE (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewContinue($CONTINUE.line, $CONTINUE.pos)}) (ALT ID PUNTO APPEND PAR_IZQ expr PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewAppend($ID.line, $ID.pos, $ID.text, $expr.e)}) (ALT ID PUNTO REMOVELAST PAR_IZQ PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewRemoveLast($ID.line, $ID.pos, $ID.text)}) (ALT ID PUNTO REMOVE PAR_IZQ AT DOSPUNTOS expr PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewRemoveAt($ID.line, $ID.pos, $ID.text, $expr.e)}) (ALT RETURN expr (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewReturn($RETURN.line, $RETURN.pos, $expr.e)}) (ALT RETURN (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewReturn($RETURN.line, $RETURN.pos, nil)}))) (RULE structCreation (returns interfaces.Instruction dec) (BLOCK (ALT STRUCT ID LLAVE_IZQ listStructDec LLAVE_DER { $dec = instructions.NewStruct($STRUCT.line, $STRUCT.pos, $ID.text, $listStructDec.l) }))) (RULE listStructDec (returns []interface{} l) (BLOCK (ALT (= list listStructDec) COMA VAR ID DOSPUNTOS types {
+                                                var arr []interface{}
+                                                newParams := environment.NewStructType($ID.text, $types.ty,"")
+                                                arr = append($list.l, newParams)
+                                                $l = arr
+                                            }) (ALT (= list listStructDec) COMA VAR (= idp ID) DOSPUNTOS (= ids ID) {
+                                                var arr []interface{}
+                                                newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                                                arr = append($list.l, newParams)
+                                                $l = arr
+                                            }) (ALT VAR ID DOSPUNTOS types {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($ID.text, $types.ty,"")
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT VAR (= idp ID) DOSPUNTOS (= ids ID) {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT { $l = []interface{}{} }))) (RULE printstmt (returns interfaces.Instruction prnt) (BLOCK (ALT PRINT PAR_IZQ listParams PAR_DER { $prnt = instructions.NewPrint($PRINT.line,$PRINT.pos,$listParams.l)}))) (RULE blockelsif (returns []interface{} blkif) (@ init {
+    $blkif = []interface{}{}
+    var listIfs []IIfstmtContext
+    }) (BLOCK (ALT (+ (BLOCK (ALT (+= elseif ifstmt)))) {
+        listIfs = localctx.(*BlockelsifContext).GetElseif()
+        for _, e := range listIfs {
+            $blkif = append($blkif, e.GetIfinst())
+        }
+    }))) (RULE ifstmt (returns interfaces.Instruction ifinst) (BLOCK (ALT IF expr LLAVE_IZQ block LLAVE_DER { $ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $block.blk, nil) }) (ALT IF expr LLAVE_IZQ (= ifblck block) LLAVE_DER ELSE LLAVE_IZQ (= elseblck block) LLAVE_DER {$ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $ifblck.blk, $elseblck.blk)}) (ALT IF expr LLAVE_IZQ (= ifblck block) LLAVE_DER ELSE blockelsif {$ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $ifblck.blk, $blockelsif.blkif)}))) (RULE whilestmt (returns interfaces.Instruction whileinst) (BLOCK (ALT WHILE expr LLAVE_IZQ block LLAVE_DER { $whileinst = instructions.NewWhile($WHILE.line, $WHILE.pos, $expr.e, $block.blk) }))) (RULE guardstmt (returns interfaces.Instruction gd) (BLOCK (ALT GUARD expr ELSE LLAVE_IZQ block LLAVE_DER { $gd = instructions.NewGuard($GUARD.line, $GUARD.pos, $expr.e, $block.blk) }))) (RULE forstmt (returns interfaces.Instruction forinst) (BLOCK (ALT FOR ID IN exprFor LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, $exprFor.e, $block.blk)}))) (RULE declarationstmt (returns interfaces.Instruction dec) (BLOCK (ALT VAR ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $expr.e) }) (ALT VAR ID IGUAL expr { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true,environment.DEPENDIENTE, $expr.e) }) (ALT VAR ID DOSPUNTOS types CIERRAPREGUNTA { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, nil) }) (ALT VAR ID DOSPUNTOS COR_IZQ types COR_DER IGUAL exprvector { $dec = instructions.NewDeclaracionVector($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $exprvector.exprv) }) (ALT VAR ID DOSPUNTOS typesmatriz IGUAL expr { $dec = instructions.NewDeclaracionMatriz($VAR.line, $VAR.pos, $ID.text,true, $typesmatriz.tm, $expr.e) }) (ALT LET ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false, $types.ty, $expr.e) }) (ALT LET ID IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false,environment.DEPENDIENTE, $expr.e) }))) (RULE asignationstmt (returns interfaces.Instruction asig) (BLOCK (ALT ID IGUAL expr { $asig = instructions.NewAsignacion($ID.line, $ID.pos, $ID.text, $expr.e) }) (ALT ID COR_IZQ (= index expr) COR_DER IGUAL (= listan expr) { $asig = instructions.NewAsignacionIndexVector($ID.line, $ID.pos, $ID.text, $index.e, $listan.e) }) (ALT ID (= op (BLOCK (ALT SUM) (ALT RES))) IGUAL expr {$asig = instructions.NewOperacionAsignacion($ID.line, $ID.pos, $ID.text, $expr.e, $op.text)}))) (RULE function (returns interfaces.Instruction fun) (BLOCK (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf,environment.NULL, $block.blk)}) (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER FLECHA types LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf, $types.ty, $block.blk)}) (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER FLECHA COR_IZQ types COR_DER LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf, environment.VECTOR, $block.blk)}))) (RULE listParamsFunc (returns []interface{} lpf) (BLOCK (ALT (= list listParamsFunc) COMA ID DOSPUNTOS types {
+    var arr []interface{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    arr = append($list.lpf, newParam)
+    $lpf = arr
+    }) (ALT (= list listParamsFunc) COMA ID DOSPUNTOS COR_IZQ types COR_DER {
+    var arr []interface{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    arr = append($list.lpf, newParam)
+    $lpf = arr
+    }) (ALT ID DOSPUNTOS types {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    $lpf = append($lpf, newParam)
+    }) (ALT ID DOSPUNTOS COR_IZQ types COR_DER {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    $lpf = append($lpf, newParam)
+    }) (ALT { $lpf = []interface{}{} }))) (RULE callFuncionIns (returns interfaces.Expression cf) (BLOCK (ALT ID PAR_IZQ listParamsCall PAR_DER { $cf = expressions.NewLlamadoFuncion($ID.line, $ID.pos, $ID.text, $listParamsCall.l) }))) (RULE types (returns environment.TipoExpresion ty) (BLOCK (ALT INT { $ty = environment.INTEGER }) (ALT FLOAT { $ty = environment.FLOAT }) (ALT STR { $ty = environment.STRING }) (ALT BOOL { $ty = environment.BOOLEAN }))) (RULE typesmatriz (returns []interface{} tm) (BLOCK (ALT COR_IZQ (= list typesmatriz) COR_DER {
+                                var arr []interface{}
+                                newTipo := environment.NewTipoArray(environment.ARRAY)
+                                arr = append($list.tm, newTipo)
+                                $tm = arr
+                            }) (ALT types {
+            $tm = []interface{}{}
+            newTipo := environment.NewTipoArray($types.ty)
+            $tm = append($tm, newTipo)
+        }))) (RULE exprFor (returns interfaces.Expression e) (BLOCK (ALT (= range1 expr) PUNTO PUNTO PUNTO (= range2 expr) {$e = expressions.NewForRange($range1.start.GetLine(), $range1.start.GetColumn(), $range1.e, $range2.e)}) (ALT expr {$e = $expr.e}))) (RULE expr (returns interfaces.Expression e) (BLOCK (ALT RES (= left expr) { $e = expressions.NewOperation($RES.line, $RES.pos, $left.e, "UNARIO", nil) }) (ALT (= left expr) (= op (BLOCK (ALT MULT) (ALT DIV) (ALT MOD))) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (BLOCK (ALT SUM) (ALT RES))) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (BLOCK (ALT MAYIG) (ALT MAYOR))) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (BLOCK (ALT MENIG) (ALT MENOR))) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (BLOCK (ALT IG_IG) (ALT DIFE))) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT NOT (= left expr) {$e = expressions.NewOperation($NOT.line, $NOT.pos, $left.e, $NOT.text, nil)}) (ALT (= left expr) (= op AND) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op OR) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ID PAR_IZQ listStructExp PAR_DER { $e = expressions.NewStructExp($ID.line, $ID.pos, $ID.text, $listStructExp.l ) }) (ALT callFuncion {$e = $callFuncion.cf}) (ALT PAR_IZQ expr PAR_DER { $e = $expr.e }) (ALT conversionstmt { $e = $conversionstmt.conv }) (ALT ID PUNTO COUNT { $e = expressions.NewCount($ID.line, $ID.pos, $ID.text)}) (ALT ID PUNTO ISEMPTY { $e = expressions.NewIsEmpty($ID.line, $ID.pos, $ID.text)}) (ALT (= list listArray) { $e = $list.p}) (ALT COR_IZQ listParams COR_DER { $e = expressions.NewArray($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT NUMBER {
+        if (strings.Contains($NUMBER.text,".")){
+            num,err := strconv.ParseFloat($NUMBER.text, 64);
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.FLOAT)
+        }else{
+            num,err := strconv.Atoi($NUMBER.text)
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.INTEGER)
+        }
+    }) (ALT STRING {
+        str := $STRING.text
+        $e = expressions.NewPrimitive($STRING.line, $STRING.pos, str[1:len(str)-1],environment.STRING)
+    }) (ALT TRU { $e = expressions.NewPrimitive($TRU.line, $TRU.pos, true, environment.BOOLEAN) }) (ALT FAL { $e = expressions.NewPrimitive($FAL.line, $FAL.pos, false, environment.BOOLEAN) }) (ALT NIL { $e = expressions.NewPrimitive($NIL.line, $NIL.pos, nil, environment.NULL) }))) (RULE conversionstmt (returns interfaces.Expression conv) (BLOCK (ALT INT PAR_IZQ expr PAR_DER { $conv = expressions.NewToInt($INT.line, $INT.pos, $expr.e) }) (ALT FLOAT PAR_IZQ expr PAR_DER { $conv = expressions.NewToFloat($FLOAT.line, $FLOAT.pos, $expr.e) }) (ALT STR PAR_IZQ expr PAR_DER { $conv = expressions.NewToString($STR.line, $STR.pos, $expr.e) }))) (RULE exprvector (returns interfaces.Expression exprv) (BLOCK (ALT COR_IZQ listParams COR_DER { $exprv = expressions.NewVector($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT COR_IZQ COR_DER { $exprv = expressions.NewVector($COR_IZQ.line, $COR_IZQ.pos, nil) }) (ALT ID { $exprv = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}))) (RULE listParams (returns []interface{} l) (BLOCK (ALT (= list listParams) COMA expr {
+                                var arr []interface{}
+                                arr = append($list.l, $expr.e)
+                                $l = arr
+                            }) (ALT expr {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }))) (RULE listArray (returns interfaces.Expression p) (BLOCK (ALT (= list listArray) COR_IZQ expr COR_DER { $p = expressions.NewArrayAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $expr.e) }) (ALT (= list listArray) PUNTO ID { $p = expressions.NewStructAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $ID.text)  }) (ALT ID { $p = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}))) (RULE callFuncion (returns interfaces.Expression cf) (BLOCK (ALT ID PAR_IZQ listParamsCall PAR_DER { $cf = expressions.NewLlamadoFuncion($ID.line, $ID.pos, $ID.text, $listParamsCall.l) }))) (RULE listParamsCall (returns []interface{} l) (BLOCK (ALT (= list listParamsCall) COMA expr {
+                                    var arr []interface{}
+                                    arr = append($list.l, $expr.e)
+                                    $l = arr
+                                }) (ALT expr {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }) (ALT {
+        $l = []interface{}{}
+    }))) (RULE listStructExp (returns []interface{} l) (BLOCK (ALT (= list listStructExp) (? (BLOCK (ALT COMA))) ID DOSPUNTOS expr {
+                                            var arr []interface{}
+                                            StrExp := environment.NewStructContent($ID.text, $expr.e)
+                                            arr = append($list.l, StrExp)
+                                            $l = arr
+                                        }) (ALT ID DOSPUNTOS expr {
+                    var arr []interface{}
+                    StrExp := environment.NewStructContent($ID.text, $expr.e)
+                    arr = append(arr, StrExp)
+                    $l = arr
+                }) (ALT {
+        $l = []interface{}{}
+    })))))
+2023-09-08 22:36:42:871 grammar LogManager.java:25 after: (COMBINED_GRAMMAR SwiftGrammar (OPTIONS (= tokenVocab SwiftLexer)) (@ header {
+    import "Proyecto1_OLC2_2S2023_202101648/interfaces"
+    import "Proyecto1_OLC2_2S2023_202101648/Environment"
+    import "Proyecto1_OLC2_2S2023_202101648/expressions"
+    import "Proyecto1_OLC2_2S2023_202101648/instructions"
+    import "strings"
+}) (RULES (RULE s (returns []interface{} code) (BLOCK (ALT block EOF {   
+        $code = $block.blk
+    }))) (RULE block (returns []interface{} blk) (@ init {
+    $blk = []interface{}{}
+    var listInt []IInstructionContext
+  }) (BLOCK (ALT (+ (BLOCK (ALT (+= ins instruction)))) {
+        listInt = localctx.(*BlockContext).GetIns()
+        for _, e := range listInt {
+            $blk = append($blk, e.GetInst())
+        }
+    }))) (RULE instruction (returns interfaces.Instruction inst) (BLOCK (ALT printstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $printstmt.prnt}) (ALT ifstmt { $inst = $ifstmt.ifinst }) (ALT declarationstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $declarationstmt.dec }) (ALT asignationstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $asignationstmt.asig }) (ALT whilestmt { $inst = $whilestmt.whileinst }) (ALT forstmt { $inst = $forstmt.forinst }) (ALT guardstmt { $inst = $guardstmt.gd }) (ALT function {$inst = $function.fun}) (ALT structCreation { $inst = $structCreation.dec }) (ALT callFuncionIns (? (BLOCK (ALT PUNTOCOMA))) {$inst = $callFuncionIns.cf}) (ALT BREAK (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewBreak($BREAK.line, $BREAK.pos)}) (ALT CONTINUE (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewContinue($CONTINUE.line, $CONTINUE.pos)}) (ALT ID PUNTO APPEND PAR_IZQ expr PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewAppend($ID.line, $ID.pos, $ID.text, $expr.e)}) (ALT ID PUNTO REMOVELAST PAR_IZQ PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewRemoveLast($ID.line, $ID.pos, $ID.text)}) (ALT ID PUNTO REMOVE PAR_IZQ AT DOSPUNTOS expr PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewRemoveAt($ID.line, $ID.pos, $ID.text, $expr.e)}) (ALT RETURN expr (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewReturn($RETURN.line, $RETURN.pos, $expr.e)}) (ALT RETURN (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewReturn($RETURN.line, $RETURN.pos, nil)}))) (RULE structCreation (returns interfaces.Instruction dec) (BLOCK (ALT STRUCT ID LLAVE_IZQ listStructDec LLAVE_DER { $dec = instructions.NewStruct($STRUCT.line, $STRUCT.pos, $ID.text, $listStructDec.l) }))) (RULE listStructDec (returns []interface{} l) (BLOCK (ALT (= list listStructDec) COMA VAR ID DOSPUNTOS types {
+                                                var arr []interface{}
+                                                newParams := environment.NewStructType($ID.text, $types.ty,"")
+                                                arr = append($list.l, newParams)
+                                                $l = arr
+                                            }) (ALT (= list listStructDec) COMA VAR (= idp ID) DOSPUNTOS (= ids ID) {
+                                                var arr []interface{}
+                                                newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                                                arr = append($list.l, newParams)
+                                                $l = arr
+                                            }) (ALT VAR ID DOSPUNTOS types {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($ID.text, $types.ty,"")
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT VAR (= idp ID) DOSPUNTOS (= ids ID) {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT { $l = []interface{}{} }))) (RULE printstmt (returns interfaces.Instruction prnt) (BLOCK (ALT PRINT PAR_IZQ listParams PAR_DER { $prnt = instructions.NewPrint($PRINT.line,$PRINT.pos,$listParams.l)}))) (RULE blockelsif (returns []interface{} blkif) (@ init {
+    $blkif = []interface{}{}
+    var listIfs []IIfstmtContext
+    }) (BLOCK (ALT (+ (BLOCK (ALT (+= elseif ifstmt)))) {
+        listIfs = localctx.(*BlockelsifContext).GetElseif()
+        for _, e := range listIfs {
+            $blkif = append($blkif, e.GetIfinst())
+        }
+    }))) (RULE ifstmt (returns interfaces.Instruction ifinst) (BLOCK (ALT IF expr LLAVE_IZQ block LLAVE_DER { $ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $block.blk, nil) }) (ALT IF expr LLAVE_IZQ (= ifblck block) LLAVE_DER ELSE LLAVE_IZQ (= elseblck block) LLAVE_DER {$ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $ifblck.blk, $elseblck.blk)}) (ALT IF expr LLAVE_IZQ (= ifblck block) LLAVE_DER ELSE blockelsif {$ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $ifblck.blk, $blockelsif.blkif)}))) (RULE whilestmt (returns interfaces.Instruction whileinst) (BLOCK (ALT WHILE expr LLAVE_IZQ block LLAVE_DER { $whileinst = instructions.NewWhile($WHILE.line, $WHILE.pos, $expr.e, $block.blk) }))) (RULE guardstmt (returns interfaces.Instruction gd) (BLOCK (ALT GUARD expr ELSE LLAVE_IZQ block LLAVE_DER { $gd = instructions.NewGuard($GUARD.line, $GUARD.pos, $expr.e, $block.blk) }))) (RULE forstmt (returns interfaces.Instruction forinst) (BLOCK (ALT FOR ID IN exprFor LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, $exprFor.e, $block.blk)}))) (RULE declarationstmt (returns interfaces.Instruction dec) (BLOCK (ALT VAR ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $expr.e) }) (ALT VAR ID IGUAL expr { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true,environment.DEPENDIENTE, $expr.e) }) (ALT VAR ID DOSPUNTOS types CIERRAPREGUNTA { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, nil) }) (ALT VAR ID DOSPUNTOS COR_IZQ types COR_DER IGUAL exprvector { $dec = instructions.NewDeclaracionVector($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $exprvector.exprv) }) (ALT VAR ID DOSPUNTOS typesmatriz IGUAL expr { $dec = instructions.NewDeclaracionMatriz($VAR.line, $VAR.pos, $ID.text,true, $typesmatriz.tm, $expr.e) }) (ALT LET ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false, $types.ty, $expr.e) }) (ALT LET ID IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false,environment.DEPENDIENTE, $expr.e) }))) (RULE asignationstmt (returns interfaces.Instruction asig) (BLOCK (ALT ID IGUAL expr { $asig = instructions.NewAsignacion($ID.line, $ID.pos, $ID.text, $expr.e) }) (ALT ID COR_IZQ (= index expr) COR_DER IGUAL (= listan expr) { $asig = instructions.NewAsignacionIndexVector($ID.line, $ID.pos, $ID.text, $index.e, $listan.e) }) (ALT ID (= op (SET SUM RES)) IGUAL expr {$asig = instructions.NewOperacionAsignacion($ID.line, $ID.pos, $ID.text, $expr.e, $op.text)}))) (RULE function (returns interfaces.Instruction fun) (BLOCK (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf,environment.NULL, $block.blk)}) (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER FLECHA types LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf, $types.ty, $block.blk)}) (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER FLECHA COR_IZQ types COR_DER LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf, environment.VECTOR, $block.blk)}))) (RULE listParamsFunc (returns []interface{} lpf) (BLOCK (ALT (= list listParamsFunc) COMA ID DOSPUNTOS types {
+    var arr []interface{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    arr = append($list.lpf, newParam)
+    $lpf = arr
+    }) (ALT (= list listParamsFunc) COMA ID DOSPUNTOS COR_IZQ types COR_DER {
+    var arr []interface{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    arr = append($list.lpf, newParam)
+    $lpf = arr
+    }) (ALT ID DOSPUNTOS types {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    $lpf = append($lpf, newParam)
+    }) (ALT ID DOSPUNTOS COR_IZQ types COR_DER {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    $lpf = append($lpf, newParam)
+    }) (ALT { $lpf = []interface{}{} }))) (RULE callFuncionIns (returns interfaces.Expression cf) (BLOCK (ALT ID PAR_IZQ listParamsCall PAR_DER { $cf = expressions.NewLlamadoFuncion($ID.line, $ID.pos, $ID.text, $listParamsCall.l) }))) (RULE types (returns environment.TipoExpresion ty) (BLOCK (ALT INT { $ty = environment.INTEGER }) (ALT FLOAT { $ty = environment.FLOAT }) (ALT STR { $ty = environment.STRING }) (ALT BOOL { $ty = environment.BOOLEAN }))) (RULE typesmatriz (returns []interface{} tm) (BLOCK (ALT COR_IZQ (= list typesmatriz) COR_DER {
+                                var arr []interface{}
+                                newTipo := environment.NewTipoArray(environment.ARRAY)
+                                arr = append($list.tm, newTipo)
+                                $tm = arr
+                            }) (ALT types {
+            $tm = []interface{}{}
+            newTipo := environment.NewTipoArray($types.ty)
+            $tm = append($tm, newTipo)
+        }))) (RULE exprFor (returns interfaces.Expression e) (BLOCK (ALT (= range1 expr) PUNTO PUNTO PUNTO (= range2 expr) {$e = expressions.NewForRange($range1.start.GetLine(), $range1.start.GetColumn(), $range1.e, $range2.e)}) (ALT expr {$e = $expr.e}))) (RULE expr (returns interfaces.Expression e) (BLOCK (ALT RES (= left expr) { $e = expressions.NewOperation($RES.line, $RES.pos, $left.e, "UNARIO", nil) }) (ALT (= left expr) (= op (SET MULT DIV MOD)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET SUM RES)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET MAYIG MAYOR)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET MENIG MENOR)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET IG_IG DIFE)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT NOT (= left expr) {$e = expressions.NewOperation($NOT.line, $NOT.pos, $left.e, $NOT.text, nil)}) (ALT (= left expr) (= op AND) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op OR) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ID PAR_IZQ listStructExp PAR_DER { $e = expressions.NewStructExp($ID.line, $ID.pos, $ID.text, $listStructExp.l ) }) (ALT callFuncion {$e = $callFuncion.cf}) (ALT PAR_IZQ expr PAR_DER { $e = $expr.e }) (ALT conversionstmt { $e = $conversionstmt.conv }) (ALT ID PUNTO COUNT { $e = expressions.NewCount($ID.line, $ID.pos, $ID.text)}) (ALT ID PUNTO ISEMPTY { $e = expressions.NewIsEmpty($ID.line, $ID.pos, $ID.text)}) (ALT (= list listArray) { $e = $list.p}) (ALT COR_IZQ listParams COR_DER { $e = expressions.NewArray($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT NUMBER {
+        if (strings.Contains($NUMBER.text,".")){
+            num,err := strconv.ParseFloat($NUMBER.text, 64);
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.FLOAT)
+        }else{
+            num,err := strconv.Atoi($NUMBER.text)
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.INTEGER)
+        }
+    }) (ALT STRING {
+        str := $STRING.text
+        $e = expressions.NewPrimitive($STRING.line, $STRING.pos, str[1:len(str)-1],environment.STRING)
+    }) (ALT TRU { $e = expressions.NewPrimitive($TRU.line, $TRU.pos, true, environment.BOOLEAN) }) (ALT FAL { $e = expressions.NewPrimitive($FAL.line, $FAL.pos, false, environment.BOOLEAN) }) (ALT NIL { $e = expressions.NewPrimitive($NIL.line, $NIL.pos, nil, environment.NULL) }))) (RULE conversionstmt (returns interfaces.Expression conv) (BLOCK (ALT INT PAR_IZQ expr PAR_DER { $conv = expressions.NewToInt($INT.line, $INT.pos, $expr.e) }) (ALT FLOAT PAR_IZQ expr PAR_DER { $conv = expressions.NewToFloat($FLOAT.line, $FLOAT.pos, $expr.e) }) (ALT STR PAR_IZQ expr PAR_DER { $conv = expressions.NewToString($STR.line, $STR.pos, $expr.e) }))) (RULE exprvector (returns interfaces.Expression exprv) (BLOCK (ALT COR_IZQ listParams COR_DER { $exprv = expressions.NewVector($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT COR_IZQ COR_DER { $exprv = expressions.NewVector($COR_IZQ.line, $COR_IZQ.pos, nil) }) (ALT ID { $exprv = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}))) (RULE listParams (returns []interface{} l) (BLOCK (ALT (= list listParams) COMA expr {
+                                var arr []interface{}
+                                arr = append($list.l, $expr.e)
+                                $l = arr
+                            }) (ALT expr {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }))) (RULE listArray (returns interfaces.Expression p) (BLOCK (ALT (= list listArray) COR_IZQ expr COR_DER { $p = expressions.NewArrayAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $expr.e) }) (ALT (= list listArray) PUNTO ID { $p = expressions.NewStructAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $ID.text)  }) (ALT ID { $p = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}))) (RULE callFuncion (returns interfaces.Expression cf) (BLOCK (ALT ID PAR_IZQ listParamsCall PAR_DER { $cf = expressions.NewLlamadoFuncion($ID.line, $ID.pos, $ID.text, $listParamsCall.l) }))) (RULE listParamsCall (returns []interface{} l) (BLOCK (ALT (= list listParamsCall) COMA expr {
+                                    var arr []interface{}
+                                    arr = append($list.l, $expr.e)
+                                    $l = arr
+                                }) (ALT expr {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }) (ALT {
+        $l = []interface{}{}
+    }))) (RULE listStructExp (returns []interface{} l) (BLOCK (ALT (= list listStructExp) (? (BLOCK (ALT COMA))) ID DOSPUNTOS expr {
+                                            var arr []interface{}
+                                            StrExp := environment.NewStructContent($ID.text, $expr.e)
+                                            arr = append($list.l, StrExp)
+                                            $l = arr
+                                        }) (ALT ID DOSPUNTOS expr {
+                    var arr []interface{}
+                    StrExp := environment.NewStructContent($ID.text, $expr.e)
+                    arr = append(arr, StrExp)
+                    $l = arr
+                }) (ALT {
+        $l = []interface{}{}
+    })))))
+2023-09-08 22:36:42:876 grammar LogManager.java:25 after extract implicit lexer =(COMBINED_GRAMMAR SwiftGrammar (OPTIONS (= tokenVocab SwiftLexer)) (@ header {
+    import "Proyecto1_OLC2_2S2023_202101648/interfaces"
+    import "Proyecto1_OLC2_2S2023_202101648/Environment"
+    import "Proyecto1_OLC2_2S2023_202101648/expressions"
+    import "Proyecto1_OLC2_2S2023_202101648/instructions"
+    import "strings"
+}) (RULES (RULE s (returns []interface{} code) (BLOCK (ALT block EOF {   
+        $code = $block.blk
+    }))) (RULE block (returns []interface{} blk) (@ init {
+    $blk = []interface{}{}
+    var listInt []IInstructionContext
+  }) (BLOCK (ALT (+ (BLOCK (ALT (+= ins instruction)))) {
+        listInt = localctx.(*BlockContext).GetIns()
+        for _, e := range listInt {
+            $blk = append($blk, e.GetInst())
+        }
+    }))) (RULE instruction (returns interfaces.Instruction inst) (BLOCK (ALT printstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $printstmt.prnt}) (ALT ifstmt { $inst = $ifstmt.ifinst }) (ALT declarationstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $declarationstmt.dec }) (ALT asignationstmt (? (BLOCK (ALT PUNTOCOMA))) { $inst = $asignationstmt.asig }) (ALT whilestmt { $inst = $whilestmt.whileinst }) (ALT forstmt { $inst = $forstmt.forinst }) (ALT guardstmt { $inst = $guardstmt.gd }) (ALT function {$inst = $function.fun}) (ALT structCreation { $inst = $structCreation.dec }) (ALT callFuncionIns (? (BLOCK (ALT PUNTOCOMA))) {$inst = $callFuncionIns.cf}) (ALT BREAK (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewBreak($BREAK.line, $BREAK.pos)}) (ALT CONTINUE (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewContinue($CONTINUE.line, $CONTINUE.pos)}) (ALT ID PUNTO APPEND PAR_IZQ expr PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewAppend($ID.line, $ID.pos, $ID.text, $expr.e)}) (ALT ID PUNTO REMOVELAST PAR_IZQ PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewRemoveLast($ID.line, $ID.pos, $ID.text)}) (ALT ID PUNTO REMOVE PAR_IZQ AT DOSPUNTOS expr PAR_DER (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewRemoveAt($ID.line, $ID.pos, $ID.text, $expr.e)}) (ALT RETURN expr (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewReturn($RETURN.line, $RETURN.pos, $expr.e)}) (ALT RETURN (? (BLOCK (ALT PUNTOCOMA))) {$inst = instructions.NewReturn($RETURN.line, $RETURN.pos, nil)}))) (RULE structCreation (returns interfaces.Instruction dec) (BLOCK (ALT STRUCT ID LLAVE_IZQ listStructDec LLAVE_DER { $dec = instructions.NewStruct($STRUCT.line, $STRUCT.pos, $ID.text, $listStructDec.l) }))) (RULE listStructDec (returns []interface{} l) (BLOCK (ALT (= list listStructDec) COMA VAR ID DOSPUNTOS types {
+                                                var arr []interface{}
+                                                newParams := environment.NewStructType($ID.text, $types.ty,"")
+                                                arr = append($list.l, newParams)
+                                                $l = arr
+                                            }) (ALT (= list listStructDec) COMA VAR (= idp ID) DOSPUNTOS (= ids ID) {
+                                                var arr []interface{}
+                                                newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                                                arr = append($list.l, newParams)
+                                                $l = arr
+                                            }) (ALT VAR ID DOSPUNTOS types {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($ID.text, $types.ty,"")
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT VAR (= idp ID) DOSPUNTOS (= ids ID) {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT { $l = []interface{}{} }))) (RULE printstmt (returns interfaces.Instruction prnt) (BLOCK (ALT PRINT PAR_IZQ listParams PAR_DER { $prnt = instructions.NewPrint($PRINT.line,$PRINT.pos,$listParams.l)}))) (RULE blockelsif (returns []interface{} blkif) (@ init {
+    $blkif = []interface{}{}
+    var listIfs []IIfstmtContext
+    }) (BLOCK (ALT (+ (BLOCK (ALT (+= elseif ifstmt)))) {
+        listIfs = localctx.(*BlockelsifContext).GetElseif()
+        for _, e := range listIfs {
+            $blkif = append($blkif, e.GetIfinst())
+        }
+    }))) (RULE ifstmt (returns interfaces.Instruction ifinst) (BLOCK (ALT IF expr LLAVE_IZQ block LLAVE_DER { $ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $block.blk, nil) }) (ALT IF expr LLAVE_IZQ (= ifblck block) LLAVE_DER ELSE LLAVE_IZQ (= elseblck block) LLAVE_DER {$ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $ifblck.blk, $elseblck.blk)}) (ALT IF expr LLAVE_IZQ (= ifblck block) LLAVE_DER ELSE blockelsif {$ifinst = instructions.NewIf($IF.line, $IF.pos, $expr.e, $ifblck.blk, $blockelsif.blkif)}))) (RULE whilestmt (returns interfaces.Instruction whileinst) (BLOCK (ALT WHILE expr LLAVE_IZQ block LLAVE_DER { $whileinst = instructions.NewWhile($WHILE.line, $WHILE.pos, $expr.e, $block.blk) }))) (RULE guardstmt (returns interfaces.Instruction gd) (BLOCK (ALT GUARD expr ELSE LLAVE_IZQ block LLAVE_DER { $gd = instructions.NewGuard($GUARD.line, $GUARD.pos, $expr.e, $block.blk) }))) (RULE forstmt (returns interfaces.Instruction forinst) (BLOCK (ALT FOR ID IN exprFor LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, $exprFor.e, $block.blk)}))) (RULE declarationstmt (returns interfaces.Instruction dec) (BLOCK (ALT VAR ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $expr.e) }) (ALT VAR ID IGUAL expr { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true,environment.DEPENDIENTE, $expr.e) }) (ALT VAR ID DOSPUNTOS types CIERRAPREGUNTA { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, nil) }) (ALT VAR ID DOSPUNTOS COR_IZQ types COR_DER IGUAL exprvector { $dec = instructions.NewDeclaracionVector($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $exprvector.exprv) }) (ALT VAR ID DOSPUNTOS typesmatriz IGUAL expr { $dec = instructions.NewDeclaracionMatriz($VAR.line, $VAR.pos, $ID.text,true, $typesmatriz.tm, $expr.e) }) (ALT LET ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false, $types.ty, $expr.e) }) (ALT LET ID IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false,environment.DEPENDIENTE, $expr.e) }))) (RULE asignationstmt (returns interfaces.Instruction asig) (BLOCK (ALT ID IGUAL expr { $asig = instructions.NewAsignacion($ID.line, $ID.pos, $ID.text, $expr.e) }) (ALT ID COR_IZQ (= index expr) COR_DER IGUAL (= listan expr) { $asig = instructions.NewAsignacionIndexVector($ID.line, $ID.pos, $ID.text, $index.e, $listan.e) }) (ALT ID (= op (SET SUM RES)) IGUAL expr {$asig = instructions.NewOperacionAsignacion($ID.line, $ID.pos, $ID.text, $expr.e, $op.text)}))) (RULE function (returns interfaces.Instruction fun) (BLOCK (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf,environment.NULL, $block.blk)}) (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER FLECHA types LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf, $types.ty, $block.blk)}) (ALT FUNC ID PAR_IZQ listParamsFunc PAR_DER FLECHA COR_IZQ types COR_DER LLAVE_IZQ block LLAVE_DER {$fun = instructions.NewFuncion($FUNC.line, $FUNC.pos, $ID.text, $listParamsFunc.lpf, environment.VECTOR, $block.blk)}))) (RULE listParamsFunc (returns []interface{} lpf) (BLOCK (ALT (= list listParamsFunc) COMA ID DOSPUNTOS types {
+    var arr []interface{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    arr = append($list.lpf, newParam)
+    $lpf = arr
+    }) (ALT (= list listParamsFunc) COMA ID DOSPUNTOS COR_IZQ types COR_DER {
+    var arr []interface{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    arr = append($list.lpf, newParam)
+    $lpf = arr
+    }) (ALT ID DOSPUNTOS types {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    $lpf = append($lpf, newParam)
+    }) (ALT ID DOSPUNTOS COR_IZQ types COR_DER {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    $lpf = append($lpf, newParam)
+    }) (ALT { $lpf = []interface{}{} }))) (RULE callFuncionIns (returns interfaces.Expression cf) (BLOCK (ALT ID PAR_IZQ listParamsCall PAR_DER { $cf = expressions.NewLlamadoFuncion($ID.line, $ID.pos, $ID.text, $listParamsCall.l) }))) (RULE types (returns environment.TipoExpresion ty) (BLOCK (ALT INT { $ty = environment.INTEGER }) (ALT FLOAT { $ty = environment.FLOAT }) (ALT STR { $ty = environment.STRING }) (ALT BOOL { $ty = environment.BOOLEAN }))) (RULE typesmatriz (returns []interface{} tm) (BLOCK (ALT COR_IZQ (= list typesmatriz) COR_DER {
+                                var arr []interface{}
+                                newTipo := environment.NewTipoArray(environment.ARRAY)
+                                arr = append($list.tm, newTipo)
+                                $tm = arr
+                            }) (ALT types {
+            $tm = []interface{}{}
+            newTipo := environment.NewTipoArray($types.ty)
+            $tm = append($tm, newTipo)
+        }))) (RULE exprFor (returns interfaces.Expression e) (BLOCK (ALT (= range1 expr) PUNTO PUNTO PUNTO (= range2 expr) {$e = expressions.NewForRange($range1.start.GetLine(), $range1.start.GetColumn(), $range1.e, $range2.e)}) (ALT expr {$e = $expr.e}))) (RULE expr (returns interfaces.Expression e) (BLOCK (ALT RES (= left expr) { $e = expressions.NewOperation($RES.line, $RES.pos, $left.e, "UNARIO", nil) }) (ALT (= left expr) (= op (SET MULT DIV MOD)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET SUM RES)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET MAYIG MAYOR)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET MENIG MENOR)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op (SET IG_IG DIFE)) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT NOT (= left expr) {$e = expressions.NewOperation($NOT.line, $NOT.pos, $left.e, $NOT.text, nil)}) (ALT (= left expr) (= op AND) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT (= left expr) (= op OR) (= right expr) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ID PAR_IZQ listStructExp PAR_DER { $e = expressions.NewStructExp($ID.line, $ID.pos, $ID.text, $listStructExp.l ) }) (ALT callFuncion {$e = $callFuncion.cf}) (ALT PAR_IZQ expr PAR_DER { $e = $expr.e }) (ALT conversionstmt { $e = $conversionstmt.conv }) (ALT ID PUNTO COUNT { $e = expressions.NewCount($ID.line, $ID.pos, $ID.text)}) (ALT ID PUNTO ISEMPTY { $e = expressions.NewIsEmpty($ID.line, $ID.pos, $ID.text)}) (ALT (= list listArray) { $e = $list.p}) (ALT COR_IZQ listParams COR_DER { $e = expressions.NewArray($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT NUMBER {
+        if (strings.Contains($NUMBER.text,".")){
+            num,err := strconv.ParseFloat($NUMBER.text, 64);
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.FLOAT)
+        }else{
+            num,err := strconv.Atoi($NUMBER.text)
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.INTEGER)
+        }
+    }) (ALT STRING {
+        str := $STRING.text
+        $e = expressions.NewPrimitive($STRING.line, $STRING.pos, str[1:len(str)-1],environment.STRING)
+    }) (ALT TRU { $e = expressions.NewPrimitive($TRU.line, $TRU.pos, true, environment.BOOLEAN) }) (ALT FAL { $e = expressions.NewPrimitive($FAL.line, $FAL.pos, false, environment.BOOLEAN) }) (ALT NIL { $e = expressions.NewPrimitive($NIL.line, $NIL.pos, nil, environment.NULL) }))) (RULE conversionstmt (returns interfaces.Expression conv) (BLOCK (ALT INT PAR_IZQ expr PAR_DER { $conv = expressions.NewToInt($INT.line, $INT.pos, $expr.e) }) (ALT FLOAT PAR_IZQ expr PAR_DER { $conv = expressions.NewToFloat($FLOAT.line, $FLOAT.pos, $expr.e) }) (ALT STR PAR_IZQ expr PAR_DER { $conv = expressions.NewToString($STR.line, $STR.pos, $expr.e) }))) (RULE exprvector (returns interfaces.Expression exprv) (BLOCK (ALT COR_IZQ listParams COR_DER { $exprv = expressions.NewVector($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT COR_IZQ COR_DER { $exprv = expressions.NewVector($COR_IZQ.line, $COR_IZQ.pos, nil) }) (ALT ID { $exprv = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}))) (RULE listParams (returns []interface{} l) (BLOCK (ALT (= list listParams) COMA expr {
+                                var arr []interface{}
+                                arr = append($list.l, $expr.e)
+                                $l = arr
+                            }) (ALT expr {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }))) (RULE listArray (returns interfaces.Expression p) (BLOCK (ALT (= list listArray) COR_IZQ expr COR_DER { $p = expressions.NewArrayAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $expr.e) }) (ALT (= list listArray) PUNTO ID { $p = expressions.NewStructAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $ID.text)  }) (ALT ID { $p = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}))) (RULE callFuncion (returns interfaces.Expression cf) (BLOCK (ALT ID PAR_IZQ listParamsCall PAR_DER { $cf = expressions.NewLlamadoFuncion($ID.line, $ID.pos, $ID.text, $listParamsCall.l) }))) (RULE listParamsCall (returns []interface{} l) (BLOCK (ALT (= list listParamsCall) COMA expr {
+                                    var arr []interface{}
+                                    arr = append($list.l, $expr.e)
+                                    $l = arr
+                                }) (ALT expr {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }) (ALT {
+        $l = []interface{}{}
+    }))) (RULE listStructExp (returns []interface{} l) (BLOCK (ALT (= list listStructExp) (? (BLOCK (ALT COMA))) ID DOSPUNTOS expr {
+                                            var arr []interface{}
+                                            StrExp := environment.NewStructContent($ID.text, $expr.e)
+                                            arr = append($list.l, StrExp)
+                                            $l = arr
+                                        }) (ALT ID DOSPUNTOS expr {
+                    var arr []interface{}
+                    StrExp := environment.NewStructContent($ID.text, $expr.e)
+                    arr = append(arr, StrExp)
+                    $l = arr
+                }) (ALT {
+        $l = []interface{}{}
+    })))))
+2023-09-08 22:36:42:876 grammar LogManager.java:25 lexer =(LEXER_GRAMMAR SwiftGrammarLexer OPTIONS (@ header {
+    import "Proyecto1_OLC2_2S2023_202101648/interfaces"
+    import "Proyecto1_OLC2_2S2023_202101648/Environment"
+    import "Proyecto1_OLC2_2S2023_202101648/expressions"
+    import "Proyecto1_OLC2_2S2023_202101648/instructions"
+    import "strings"
+}) RULES)
+2023-09-08 22:36:42:930 left-recursion LogManager.java:25 listStructDec returns [[]interface{} l]
+    :   ( {} VAR<tokenIndex=327> ID<tokenIndex=329> DOSPUNTOS<tokenIndex=331> types<tokenIndex=333> {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($ID.text, $types.ty,"")
+                        arr = append(arr, newParams)
+                        $l = arr
+                    } 
+        | VAR<tokenIndex=339> idp=ID<tokenIndex=343> DOSPUNTOS<tokenIndex=345> ids=ID<tokenIndex=349> {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                        arr = append(arr, newParams)
+                        $l = arr
+                    } 
+        | { $l = []interface{}{} } 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 5)}?<p=5> COMA<tokenIndex=291> VAR<tokenIndex=293> ID<tokenIndex=295> DOSPUNTOS<tokenIndex=297> types<tokenIndex=299> {
+                                                          var arr []interface{}
+                                                          newParams := environment.NewStructType($ID.text, $types.ty,"")
+                                                          arr = append($list.l, newParams)
+                                                          $l = arr
+                                                      }
+                  | {p.Precpred(p.GetParserRuleContext(), 4)}?<p=4> COMA<tokenIndex=309> VAR<tokenIndex=311> idp=ID<tokenIndex=315> DOSPUNTOS<tokenIndex=317> ids=ID<tokenIndex=321> {
+                                                          var arr []interface{}
+                                                          newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                                                          arr = append($list.l, newParams)
+                                                          $l = arr
+                                                      }
+        )*
+    ;
+2023-09-08 22:36:42:991 grammar LogManager.java:25 added: (RULE listStructDec (returns []interface{} l) (BLOCK (ALT (BLOCK (ALT {} (VAR (ELEMENT_OPTIONS (= tokenIndex 327))) (ID (ELEMENT_OPTIONS (= tokenIndex 329))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 331))) (types (ELEMENT_OPTIONS (= tokenIndex 333))) {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($ID.text, $types.ty,"")
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT (VAR (ELEMENT_OPTIONS (= tokenIndex 339))) (= idp (ID (ELEMENT_OPTIONS (= tokenIndex 343)))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 345))) (= ids (ID (ELEMENT_OPTIONS (= tokenIndex 349)))) {
+                        var arr []interface{}
+                        newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                        arr = append(arr, newParams)
+                        $l = arr
+                    }) (ALT { $l = []interface{}{} })) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 5)}? (ELEMENT_OPTIONS (= p 5))) (COMA (ELEMENT_OPTIONS (= tokenIndex 291))) (VAR (ELEMENT_OPTIONS (= tokenIndex 293))) (ID (ELEMENT_OPTIONS (= tokenIndex 295))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 297))) (types (ELEMENT_OPTIONS (= tokenIndex 299))) {
+                                                          var arr []interface{}
+                                                          newParams := environment.NewStructType($ID.text, $types.ty,"")
+                                                          arr = append($list.l, newParams)
+                                                          $l = arr
+                                                      }) (ALT ({p.Precpred(p.GetParserRuleContext(), 4)}? (ELEMENT_OPTIONS (= p 4))) (COMA (ELEMENT_OPTIONS (= tokenIndex 309))) (VAR (ELEMENT_OPTIONS (= tokenIndex 311))) (= idp (ID (ELEMENT_OPTIONS (= tokenIndex 315)))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 317))) (= ids (ID (ELEMENT_OPTIONS (= tokenIndex 321)))) {
+                                                          var arr []interface{}
+                                                          newParams := environment.NewStructType($idp.text, $environment.Dependiente,$ids.text)
+                                                          arr = append($list.l, newParams)
+                                                          $l = arr
+                                                      }))))))
+2023-09-08 22:36:42:996 left-recursion LogManager.java:25 listParamsFunc returns [[]interface{} lpf]
+    :   ( {} ID<tokenIndex=831> DOSPUNTOS<tokenIndex=833> types<tokenIndex=835> {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    $lpf = append($lpf, newParam)
+    } 
+        | ID<tokenIndex=841> DOSPUNTOS<tokenIndex=843> COR_IZQ<tokenIndex=845> types<tokenIndex=847> COR_DER<tokenIndex=849> {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    $lpf = append($lpf, newParam)
+    } 
+        | { $lpf = []interface{}{} } 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 5)}?<p=5> COMA<tokenIndex=800> ID<tokenIndex=802> DOSPUNTOS<tokenIndex=804> types<tokenIndex=806> {
+              var arr []interface{}
+              newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+              arr = append($list.lpf, newParam)
+              $lpf = arr
+              }
+                  | {p.Precpred(p.GetParserRuleContext(), 4)}?<p=4> COMA<tokenIndex=815> ID<tokenIndex=817> DOSPUNTOS<tokenIndex=819> COR_IZQ<tokenIndex=821> types<tokenIndex=823> COR_DER<tokenIndex=825> {
+              var arr []interface{}
+              newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+              arr = append($list.lpf, newParam)
+              $lpf = arr
+              }
+        )*
+    ;
+2023-09-08 22:36:43:031 grammar LogManager.java:25 added: (RULE listParamsFunc (returns []interface{} lpf) (BLOCK (ALT (BLOCK (ALT {} (ID (ELEMENT_OPTIONS (= tokenIndex 831))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 833))) (types (ELEMENT_OPTIONS (= tokenIndex 835))) {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+    $lpf = append($lpf, newParam)
+    }) (ALT (ID (ELEMENT_OPTIONS (= tokenIndex 841))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 843))) (COR_IZQ (ELEMENT_OPTIONS (= tokenIndex 845))) (types (ELEMENT_OPTIONS (= tokenIndex 847))) (COR_DER (ELEMENT_OPTIONS (= tokenIndex 849))) {
+    $lpf = []interface{}{}
+    newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+    $lpf = append($lpf, newParam)
+    }) (ALT { $lpf = []interface{}{} })) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 5)}? (ELEMENT_OPTIONS (= p 5))) (COMA (ELEMENT_OPTIONS (= tokenIndex 800))) (ID (ELEMENT_OPTIONS (= tokenIndex 802))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 804))) (types (ELEMENT_OPTIONS (= tokenIndex 806))) {
+              var arr []interface{}
+              newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, $types.ty)
+              arr = append($list.lpf, newParam)
+              $lpf = arr
+              }) (ALT ({p.Precpred(p.GetParserRuleContext(), 4)}? (ELEMENT_OPTIONS (= p 4))) (COMA (ELEMENT_OPTIONS (= tokenIndex 815))) (ID (ELEMENT_OPTIONS (= tokenIndex 817))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 819))) (COR_IZQ (ELEMENT_OPTIONS (= tokenIndex 821))) (types (ELEMENT_OPTIONS (= tokenIndex 823))) (COR_DER (ELEMENT_OPTIONS (= tokenIndex 825))) {
+              var arr []interface{}
+              newParam := instructions.NewDeclaracionParametros($ID.line, $ID.pos, $ID.text, environment.VECTOR)
+              arr = append($list.lpf, newParam)
+              $lpf = arr
+              }))))))
+2023-09-08 22:36:43:042 left-recursion LogManager.java:25 expr returns [interfaces.Expression e]
+    :   ( {} RES<tokenIndex=970> left=expr<tokenIndex=974,p=22> { $e = expressions.NewOperation($RES.line, $RES.pos, $left.e, "UNARIO", nil) } 
+        | NOT<tokenIndex=1082> left=expr<tokenIndex=1086,p=16> {$e = expressions.NewOperation($NOT.line, $NOT.pos, $left.e, $NOT.text, nil)} 
+        | ID<tokenIndex=1124> PAR_IZQ<tokenIndex=1126> listStructExp<tokenIndex=1128> PAR_DER<tokenIndex=1130> { $e = expressions.NewStructExp($ID.line, $ID.pos, $ID.text, $listStructExp.l ) } 
+        | callFuncion<tokenIndex=1136> {$e = $callFuncion.cf} 
+        | PAR_IZQ<tokenIndex=1142> expr<tokenIndex=1144> PAR_DER<tokenIndex=1146> { $e = $expr.e } 
+        | conversionstmt<tokenIndex=1152> { $e = $conversionstmt.conv } 
+        | ID<tokenIndex=1157> PUNTO<tokenIndex=1159> COUNT<tokenIndex=1161> { $e = expressions.NewCount($ID.line, $ID.pos, $ID.text)} 
+        | ID<tokenIndex=1166> PUNTO<tokenIndex=1168> ISEMPTY<tokenIndex=1170> { $e = expressions.NewIsEmpty($ID.line, $ID.pos, $ID.text)} 
+        | list=listArray<tokenIndex=1178> { $e = $list.p} 
+        | COR_IZQ<tokenIndex=1184> listParams<tokenIndex=1186> COR_DER<tokenIndex=1188> { $e = expressions.NewArray($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) } 
+        | NUMBER<tokenIndex=1194>                             
+    {
+        if (strings.Contains($NUMBER.text,".")){
+            num,err := strconv.ParseFloat($NUMBER.text, 64);
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.FLOAT)
+        }else{
+            num,err := strconv.Atoi($NUMBER.text)
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.INTEGER)
+        }
+    } 
+        | STRING<tokenIndex=1200>
+    {
+        str := $STRING.text
+        $e = expressions.NewPrimitive($STRING.line, $STRING.pos, str[1:len(str)-1],environment.STRING)
+    } 
+        | TRU<tokenIndex=1206> { $e = expressions.NewPrimitive($TRU.line, $TRU.pos, true, environment.BOOLEAN) } 
+        | FAL<tokenIndex=1212> { $e = expressions.NewPrimitive($FAL.line, $FAL.pos, false, environment.BOOLEAN) } 
+        | NIL<tokenIndex=1218> { $e = expressions.NewPrimitive($NIL.line, $NIL.pos, nil, environment.NULL) } 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 21)}?<p=21> op=(MULT<tokenIndex=987>|DIV<tokenIndex=989>|MOD<tokenIndex=991>) right=expr<tokenIndex=996,p=22> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 20)}?<p=20> op=(SUM<tokenIndex=1009>|RES<tokenIndex=1011>) right=expr<tokenIndex=1016,p=21> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 19)}?<p=19> op=(MAYIG<tokenIndex=1029>|MAYOR<tokenIndex=1031>) right=expr<tokenIndex=1036,p=20> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 18)}?<p=18> op=(MENIG<tokenIndex=1049>|MENOR<tokenIndex=1051>) right=expr<tokenIndex=1056,p=19> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 17)}?<p=17> op=(IG_IG<tokenIndex=1069>|DIFE<tokenIndex=1071>) right=expr<tokenIndex=1076,p=18> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 15)}?<p=15> op=AND<tokenIndex=1098> right=expr<tokenIndex=1102,p=16> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 14)}?<p=14> op=OR<tokenIndex=1114> right=expr<tokenIndex=1118,p=15> { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }
+        )*
+    ;
+2023-09-08 22:36:43:074 grammar LogManager.java:25 added: (RULE expr (returns interfaces.Expression e) (BLOCK (ALT (BLOCK (ALT {} (RES (ELEMENT_OPTIONS (= tokenIndex 970))) (= left (expr (ELEMENT_OPTIONS (= tokenIndex 974) (= p 22)))) { $e = expressions.NewOperation($RES.line, $RES.pos, $left.e, "UNARIO", nil) }) (ALT (NOT (ELEMENT_OPTIONS (= tokenIndex 1082))) (= left (expr (ELEMENT_OPTIONS (= tokenIndex 1086) (= p 16)))) {$e = expressions.NewOperation($NOT.line, $NOT.pos, $left.e, $NOT.text, nil)}) (ALT (ID (ELEMENT_OPTIONS (= tokenIndex 1124))) (PAR_IZQ (ELEMENT_OPTIONS (= tokenIndex 1126))) (listStructExp (ELEMENT_OPTIONS (= tokenIndex 1128))) (PAR_DER (ELEMENT_OPTIONS (= tokenIndex 1130))) { $e = expressions.NewStructExp($ID.line, $ID.pos, $ID.text, $listStructExp.l ) }) (ALT (callFuncion (ELEMENT_OPTIONS (= tokenIndex 1136))) {$e = $callFuncion.cf}) (ALT (PAR_IZQ (ELEMENT_OPTIONS (= tokenIndex 1142))) (expr (ELEMENT_OPTIONS (= tokenIndex 1144))) (PAR_DER (ELEMENT_OPTIONS (= tokenIndex 1146))) { $e = $expr.e }) (ALT (conversionstmt (ELEMENT_OPTIONS (= tokenIndex 1152))) { $e = $conversionstmt.conv }) (ALT (ID (ELEMENT_OPTIONS (= tokenIndex 1157))) (PUNTO (ELEMENT_OPTIONS (= tokenIndex 1159))) (COUNT (ELEMENT_OPTIONS (= tokenIndex 1161))) { $e = expressions.NewCount($ID.line, $ID.pos, $ID.text)}) (ALT (ID (ELEMENT_OPTIONS (= tokenIndex 1166))) (PUNTO (ELEMENT_OPTIONS (= tokenIndex 1168))) (ISEMPTY (ELEMENT_OPTIONS (= tokenIndex 1170))) { $e = expressions.NewIsEmpty($ID.line, $ID.pos, $ID.text)}) (ALT (= list (listArray (ELEMENT_OPTIONS (= tokenIndex 1178)))) { $e = $list.p}) (ALT (COR_IZQ (ELEMENT_OPTIONS (= tokenIndex 1184))) (listParams (ELEMENT_OPTIONS (= tokenIndex 1186))) (COR_DER (ELEMENT_OPTIONS (= tokenIndex 1188))) { $e = expressions.NewArray($COR_IZQ.line, $COR_IZQ.pos, $listParams.l) }) (ALT (NUMBER (ELEMENT_OPTIONS (= tokenIndex 1194))) {
+        if (strings.Contains($NUMBER.text,".")){
+            num,err := strconv.ParseFloat($NUMBER.text, 64);
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.FLOAT)
+        }else{
+            num,err := strconv.Atoi($NUMBER.text)
+            if err!= nil{
+                fmt.Println(err)
+            }
+            $e = expressions.NewPrimitive($NUMBER.line,$NUMBER.pos,num,environment.INTEGER)
+        }
+    }) (ALT (STRING (ELEMENT_OPTIONS (= tokenIndex 1200))) {
+        str := $STRING.text
+        $e = expressions.NewPrimitive($STRING.line, $STRING.pos, str[1:len(str)-1],environment.STRING)
+    }) (ALT (TRU (ELEMENT_OPTIONS (= tokenIndex 1206))) { $e = expressions.NewPrimitive($TRU.line, $TRU.pos, true, environment.BOOLEAN) }) (ALT (FAL (ELEMENT_OPTIONS (= tokenIndex 1212))) { $e = expressions.NewPrimitive($FAL.line, $FAL.pos, false, environment.BOOLEAN) }) (ALT (NIL (ELEMENT_OPTIONS (= tokenIndex 1218))) { $e = expressions.NewPrimitive($NIL.line, $NIL.pos, nil, environment.NULL) })) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 21)}? (ELEMENT_OPTIONS (= p 21))) (= op (SET (MULT (ELEMENT_OPTIONS (= tokenIndex 987))) (DIV (ELEMENT_OPTIONS (= tokenIndex 989))) (MOD (ELEMENT_OPTIONS (= tokenIndex 991))))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 996) (= p 22)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 20)}? (ELEMENT_OPTIONS (= p 20))) (= op (SET (SUM (ELEMENT_OPTIONS (= tokenIndex 1009))) (RES (ELEMENT_OPTIONS (= tokenIndex 1011))))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 1016) (= p 21)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 19)}? (ELEMENT_OPTIONS (= p 19))) (= op (SET (MAYIG (ELEMENT_OPTIONS (= tokenIndex 1029))) (MAYOR (ELEMENT_OPTIONS (= tokenIndex 1031))))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 1036) (= p 20)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 18)}? (ELEMENT_OPTIONS (= p 18))) (= op (SET (MENIG (ELEMENT_OPTIONS (= tokenIndex 1049))) (MENOR (ELEMENT_OPTIONS (= tokenIndex 1051))))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 1056) (= p 19)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 17)}? (ELEMENT_OPTIONS (= p 17))) (= op (SET (IG_IG (ELEMENT_OPTIONS (= tokenIndex 1069))) (DIFE (ELEMENT_OPTIONS (= tokenIndex 1071))))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 1076) (= p 18)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 15)}? (ELEMENT_OPTIONS (= p 15))) (= op (AND (ELEMENT_OPTIONS (= tokenIndex 1098)))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 1102) (= p 16)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 14)}? (ELEMENT_OPTIONS (= p 14))) (= op (OR (ELEMENT_OPTIONS (= tokenIndex 1114)))) (= right (expr (ELEMENT_OPTIONS (= tokenIndex 1118) (= p 15)))) { $e = expressions.NewOperation($left.start.GetLine(), $left.start.GetColumn(), $left.e, $op.text, $right.e) }))))))
+2023-09-08 22:36:43:076 left-recursion LogManager.java:25 listParams returns [[]interface{} l]
+    :   ( {} expr<tokenIndex=1319> {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        } 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 2)}?<p=2> COMA<tokenIndex=1311> expr<tokenIndex=1313> {
+                                          var arr []interface{}
+                                          arr = append($list.l, $expr.e)
+                                          $l = arr
+                                      }
+        )*
+    ;
+2023-09-08 22:36:43:079 grammar LogManager.java:25 added: (RULE listParams (returns []interface{} l) (BLOCK (ALT (BLOCK (ALT {} (expr (ELEMENT_OPTIONS (= tokenIndex 1319))) {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        })) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 2)}? (ELEMENT_OPTIONS (= p 2))) (COMA (ELEMENT_OPTIONS (= tokenIndex 1311))) (expr (ELEMENT_OPTIONS (= tokenIndex 1313))) {
+                                          var arr []interface{}
+                                          arr = append($list.l, $expr.e)
+                                          $l = arr
+                                      }))))))
+2023-09-08 22:36:43:080 left-recursion LogManager.java:25 listArray returns [interfaces.Expression p]
+    :   ( {} ID<tokenIndex=1361> { $p = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)} 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 3)}?<p=3> COR_IZQ<tokenIndex=1338> expr<tokenIndex=1340> COR_DER<tokenIndex=1342> { $p = expressions.NewArrayAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $expr.e) }
+                  | {p.Precpred(p.GetParserRuleContext(), 2)}?<p=2> PUNTO<tokenIndex=1353> ID<tokenIndex=1355> { $p = expressions.NewStructAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $ID.text)  }
+        )*
+    ;
+2023-09-08 22:36:43:087 grammar LogManager.java:25 added: (RULE listArray (returns interfaces.Expression p) (BLOCK (ALT (BLOCK (ALT {} (ID (ELEMENT_OPTIONS (= tokenIndex 1361))) { $p = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)})) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 3)}? (ELEMENT_OPTIONS (= p 3))) (COR_IZQ (ELEMENT_OPTIONS (= tokenIndex 1338))) (expr (ELEMENT_OPTIONS (= tokenIndex 1340))) (COR_DER (ELEMENT_OPTIONS (= tokenIndex 1342))) { $p = expressions.NewArrayAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $expr.e) }) (ALT ({p.Precpred(p.GetParserRuleContext(), 2)}? (ELEMENT_OPTIONS (= p 2))) (PUNTO (ELEMENT_OPTIONS (= tokenIndex 1353))) (ID (ELEMENT_OPTIONS (= tokenIndex 1355))) { $p = expressions.NewStructAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $ID.text)  }))))))
+2023-09-08 22:36:43:088 left-recursion LogManager.java:25 listParamsCall returns [[]interface{} l]
+    :   ( {} expr<tokenIndex=1405>  {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        } 
+        | {
+        $l = []interface{}{}
+    } 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 3)}?<p=3> COMA<tokenIndex=1397> expr<tokenIndex=1399> {
+                                              var arr []interface{}
+                                              arr = append($list.l, $expr.e)
+                                              $l = arr
+                                          }
+        )*
+    ;
+2023-09-08 22:36:43:091 grammar LogManager.java:25 added: (RULE listParamsCall (returns []interface{} l) (BLOCK (ALT (BLOCK (ALT {} (expr (ELEMENT_OPTIONS (= tokenIndex 1405))) {
+            $l = []interface{}{}
+            $l = append($l, $expr.e)
+        }) (ALT {
+        $l = []interface{}{}
+    })) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 3)}? (ELEMENT_OPTIONS (= p 3))) (COMA (ELEMENT_OPTIONS (= tokenIndex 1397))) (expr (ELEMENT_OPTIONS (= tokenIndex 1399))) {
+                                              var arr []interface{}
+                                              arr = append($list.l, $expr.e)
+                                              $l = arr
+                                          }))))))
+2023-09-08 22:36:43:092 left-recursion LogManager.java:25 listStructExp returns [[]interface{} l]
+    :   ( {} ID<tokenIndex=1441> DOSPUNTOS<tokenIndex=1443> expr<tokenIndex=1445>{
+                    var arr []interface{}
+                    StrExp := environment.NewStructContent($ID.text, $expr.e)
+                    arr = append(arr, StrExp)
+                    $l = arr
+                } 
+        | {
+        $l = []interface{}{}
+    } 
+        )
+        (
+          {p.Precpred(p.GetParserRuleContext(), 3)}?<p=3> (COMA<tokenIndex=1427>)? ID<tokenIndex=1431> DOSPUNTOS<tokenIndex=1433> expr<tokenIndex=1435> {
+                                                      var arr []interface{}
+                                                      StrExp := environment.NewStructContent($ID.text, $expr.e)
+                                                      arr = append($list.l, StrExp)
+                                                      $l = arr
+                                                  }
+        )*
+    ;
+2023-09-08 22:36:43:096 grammar LogManager.java:25 added: (RULE listStructExp (returns []interface{} l) (BLOCK (ALT (BLOCK (ALT {} (ID (ELEMENT_OPTIONS (= tokenIndex 1441))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 1443))) (expr (ELEMENT_OPTIONS (= tokenIndex 1445))) {
+                    var arr []interface{}
+                    StrExp := environment.NewStructContent($ID.text, $expr.e)
+                    arr = append(arr, StrExp)
+                    $l = arr
+                }) (ALT {
+        $l = []interface{}{}
+    })) (* (BLOCK (ALT ({p.Precpred(p.GetParserRuleContext(), 3)}? (ELEMENT_OPTIONS (= p 3))) (? (BLOCK (ALT (COMA (ELEMENT_OPTIONS (= tokenIndex 1427)))))) (ID (ELEMENT_OPTIONS (= tokenIndex 1431))) (DOSPUNTOS (ELEMENT_OPTIONS (= tokenIndex 1433))) (expr (ELEMENT_OPTIONS (= tokenIndex 1435))) {
+                                                      var arr []interface{}
+                                                      StrExp := environment.NewStructContent($ID.text, $expr.e)
+                                                      arr = append($list.l, StrExp)
+                                                      $l = arr
+                                                  }))))))
+2023-09-08 22:36:43:131 grammar LogManager.java:25 import INT=1
+2023-09-08 22:36:43:134 grammar LogManager.java:25 import FLOAT=2
+2023-09-08 22:36:43:135 grammar LogManager.java:25 import BOOL=3
+2023-09-08 22:36:43:135 grammar LogManager.java:25 import STR=4
+2023-09-08 22:36:43:135 grammar LogManager.java:25 import TRU=5
+2023-09-08 22:36:43:136 grammar LogManager.java:25 import FAL=6
+2023-09-08 22:36:43:136 grammar LogManager.java:25 import PRINT=7
+2023-09-08 22:36:43:138 grammar LogManager.java:25 import IF=8
+2023-09-08 22:36:43:139 grammar LogManager.java:25 import ELSE=9
+2023-09-08 22:36:43:140 grammar LogManager.java:25 import WHILE=10
+2023-09-08 22:36:43:141 grammar LogManager.java:25 import FOR=11
+2023-09-08 22:36:43:141 grammar LogManager.java:25 import IN=12
+2023-09-08 22:36:43:141 grammar LogManager.java:25 import VAR=13
+2023-09-08 22:36:43:141 grammar LogManager.java:25 import LET=14
+2023-09-08 22:36:43:141 grammar LogManager.java:25 import NIL=15
+2023-09-08 22:36:43:142 grammar LogManager.java:25 import BREAK=16
+2023-09-08 22:36:43:142 grammar LogManager.java:25 import CONTINUE=17
+2023-09-08 22:36:43:142 grammar LogManager.java:25 import APPEND=18
+2023-09-08 22:36:43:142 grammar LogManager.java:25 import REMOVELAST=19
+2023-09-08 22:36:43:142 grammar LogManager.java:25 import REMOVE=20
+2023-09-08 22:36:43:142 grammar LogManager.java:25 import AT=21
+2023-09-08 22:36:43:143 grammar LogManager.java:25 import ISEMPTY=22
+2023-09-08 22:36:43:143 grammar LogManager.java:25 import COUNT=23
+2023-09-08 22:36:43:143 grammar LogManager.java:25 import ARRAY=24
+2023-09-08 22:36:43:143 grammar LogManager.java:25 import RETURN=25
+2023-09-08 22:36:43:143 grammar LogManager.java:25 import FUNC=26
+2023-09-08 22:36:43:143 grammar LogManager.java:25 import STRUCT=27
+2023-09-08 22:36:43:144 grammar LogManager.java:25 import GUARD=28
+2023-09-08 22:36:43:144 grammar LogManager.java:25 import NUMBER=29
+2023-09-08 22:36:43:144 grammar LogManager.java:25 import STRING=30
+2023-09-08 22:36:43:144 grammar LogManager.java:25 import ID=31
+2023-09-08 22:36:43:144 grammar LogManager.java:25 import DIFE=32
+2023-09-08 22:36:43:145 grammar LogManager.java:25 import IG_IG=33
+2023-09-08 22:36:43:145 grammar LogManager.java:25 import NOT=34
+2023-09-08 22:36:43:145 grammar LogManager.java:25 import OR=35
+2023-09-08 22:36:43:145 grammar LogManager.java:25 import AND=36
+2023-09-08 22:36:43:146 grammar LogManager.java:25 import IGUAL=37
+2023-09-08 22:36:43:146 grammar LogManager.java:25 import MAYIG=38
+2023-09-08 22:36:43:146 grammar LogManager.java:25 import MENIG=39
+2023-09-08 22:36:43:146 grammar LogManager.java:25 import MAYOR=40
+2023-09-08 22:36:43:147 grammar LogManager.java:25 import MENOR=41
+2023-09-08 22:36:43:148 grammar LogManager.java:25 import MULT=42
+2023-09-08 22:36:43:148 grammar LogManager.java:25 import DIV=43
+2023-09-08 22:36:43:148 grammar LogManager.java:25 import SUM=44
+2023-09-08 22:36:43:148 grammar LogManager.java:25 import RES=45
+2023-09-08 22:36:43:151 grammar LogManager.java:25 import MOD=46
+2023-09-08 22:36:43:151 grammar LogManager.java:25 import PAR_IZQ=47
+2023-09-08 22:36:43:151 grammar LogManager.java:25 import PAR_DER=48
+2023-09-08 22:36:43:151 grammar LogManager.java:25 import LLAVE_IZQ=49
+2023-09-08 22:36:43:151 grammar LogManager.java:25 import LLAVE_DER=50
+2023-09-08 22:36:43:152 grammar LogManager.java:25 import DOSPUNTOS=51
+2023-09-08 22:36:43:152 grammar LogManager.java:25 import COR_IZQ=52
+2023-09-08 22:36:43:152 grammar LogManager.java:25 import COR_DER=53
+2023-09-08 22:36:43:153 grammar LogManager.java:25 import COMA=54
+2023-09-08 22:36:43:153 grammar LogManager.java:25 import CIERRAPREGUNTA=55
+2023-09-08 22:36:43:153 grammar LogManager.java:25 import PUNTOCOMA=56
+2023-09-08 22:36:43:153 grammar LogManager.java:25 import PUNTO=57
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import FLECHA=58
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import WHITESPACE=59
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import COMMENT=60
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import LINE_COMMENT=61
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import 'Int'=1
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import 'Float'=2
+2023-09-08 22:36:43:154 grammar LogManager.java:25 import 'Bool'=3
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'String'=4
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'true'=5
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'false'=6
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'print'=7
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'if'=8
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'else'=9
+2023-09-08 22:36:43:155 grammar LogManager.java:25 import 'while'=10
+2023-09-08 22:36:43:156 grammar LogManager.java:25 import 'for'=11
+2023-09-08 22:36:43:156 grammar LogManager.java:25 import 'in'=12
+2023-09-08 22:36:43:156 grammar LogManager.java:25 import 'var'=13
+2023-09-08 22:36:43:156 grammar LogManager.java:25 import 'let'=14
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'nil'=15
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'break'=16
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'continue'=17
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'append'=18
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'removeLast'=19
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'remove'=20
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'at'=21
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'isEmpty'=22
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'count'=23
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'array'=24
+2023-09-08 22:36:43:157 grammar LogManager.java:25 import 'return'=25
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import 'func'=26
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import 'struct'=27
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import 'guard'=28
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import '!='=32
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import '=='=33
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import '!'=34
+2023-09-08 22:36:43:158 grammar LogManager.java:25 import '||'=35
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '&&'=36
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '='=37
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '>='=38
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '<='=39
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '>'=40
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '<'=41
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '*'=42
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '/'=43
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '+'=44
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '-'=45
+2023-09-08 22:36:43:159 grammar LogManager.java:25 import '%'=46
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import '('=47
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import ')'=48
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import '{'=49
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import '}'=50
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import ':'=51
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import '['=52
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import ']'=53
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import ','=54
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import '?'=55
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import ';'=56
+2023-09-08 22:36:43:160 grammar LogManager.java:25 import '.'=57
+2023-09-08 22:36:43:161 grammar LogManager.java:25 import '->'=58
+2023-09-08 22:36:43:161 grammar LogManager.java:25 tokens={INT=1, FLOAT=2, BOOL=3, STR=4, TRU=5, FAL=6, PRINT=7, IF=8, ELSE=9, WHILE=10, FOR=11, IN=12, VAR=13, LET=14, NIL=15, BREAK=16, CONTINUE=17, APPEND=18, REMOVELAST=19, REMOVE=20, AT=21, ISEMPTY=22, COUNT=23, ARRAY=24, RETURN=25, FUNC=26, STRUCT=27, GUARD=28, NUMBER=29, STRING=30, ID=31, DIFE=32, IG_IG=33, NOT=34, OR=35, AND=36, IGUAL=37, MAYIG=38, MENIG=39, MAYOR=40, MENOR=41, MULT=42, DIV=43, SUM=44, RES=45, MOD=46, PAR_IZQ=47, PAR_DER=48, LLAVE_IZQ=49, LLAVE_DER=50, DOSPUNTOS=51, COR_IZQ=52, COR_DER=53, COMA=54, CIERRAPREGUNTA=55, PUNTOCOMA=56, PUNTO=57, FLECHA=58, WHITESPACE=59, COMMENT=60, LINE_COMMENT=61, 'Int'=1, 'Float'=2, 'Bool'=3, 'String'=4, 'true'=5, 'false'=6, 'print'=7, 'if'=8, 'else'=9, 'while'=10, 'for'=11, 'in'=12, 'var'=13, 'let'=14, 'nil'=15, 'break'=16, 'continue'=17, 'append'=18, 'removeLast'=19, 'remove'=20, 'at'=21, 'isEmpty'=22, 'count'=23, 'array'=24, 'return'=25, 'func'=26, 'struct'=27, 'guard'=28, '!='=32, '=='=33, '!'=34, '||'=35, '&&'=36, '='=37, '>='=38, '<='=39, '>'=40, '<'=41, '*'=42, '/'=43, '+'=44, '-'=45, '%'=46, '('=47, ')'=48, '{'=49, '}'=50, ':'=51, '['=52, ']'=53, ','=54, '?'=55, ';'=56, '.'=57, '->'=58}
+2023-09-08 22:36:43:162 semantics LogManager.java:25 tokens={EOF=-1, INT=1, FLOAT=2, BOOL=3, STR=4, TRU=5, FAL=6, PRINT=7, IF=8, ELSE=9, WHILE=10, FOR=11, IN=12, VAR=13, LET=14, NIL=15, BREAK=16, CONTINUE=17, APPEND=18, REMOVELAST=19, REMOVE=20, AT=21, ISEMPTY=22, COUNT=23, ARRAY=24, RETURN=25, FUNC=26, STRUCT=27, GUARD=28, NUMBER=29, STRING=30, ID=31, DIFE=32, IG_IG=33, NOT=34, OR=35, AND=36, IGUAL=37, MAYIG=38, MENIG=39, MAYOR=40, MENOR=41, MULT=42, DIV=43, SUM=44, RES=45, MOD=46, PAR_IZQ=47, PAR_DER=48, LLAVE_IZQ=49, LLAVE_DER=50, DOSPUNTOS=51, COR_IZQ=52, COR_DER=53, COMA=54, CIERRAPREGUNTA=55, PUNTOCOMA=56, PUNTO=57, FLECHA=58, WHITESPACE=59, COMMENT=60, LINE_COMMENT=61}
+2023-09-08 22:36:43:162 semantics LogManager.java:25 strings={'Int'=1, 'Float'=2, 'Bool'=3, 'String'=4, 'true'=5, 'false'=6, 'print'=7, 'if'=8, 'else'=9, 'while'=10, 'for'=11, 'in'=12, 'var'=13, 'let'=14, 'nil'=15, 'break'=16, 'continue'=17, 'append'=18, 'removeLast'=19, 'remove'=20, 'at'=21, 'isEmpty'=22, 'count'=23, 'array'=24, 'return'=25, 'func'=26, 'struct'=27, 'guard'=28, '!='=32, '=='=33, '!'=34, '||'=35, '&&'=36, '='=37, '>='=38, '<='=39, '>'=40, '<'=41, '*'=42, '/'=43, '+'=44, '-'=45, '%'=46, '('=47, ')'=48, '{'=49, '}'=50, ':'=51, '['=52, ']'=53, ','=54, '?'=55, ';'=56, '.'=57, '->'=58}
