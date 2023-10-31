@@ -16,9 +16,8 @@ func NewDeclaracionParametros(lin int, col int, id string, tipo environment.Tipo
 	return DeclaracionParametros{lin,col,id,tipo}
 }
 
-func(p DeclaracionParametros) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Symbol {
-	var resultado environment.Symbol
-	resultado = environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: p.Tipo, Valor: 0, Mutable: true}
-	env.(environment.Environment).SaveVariable(p.Id,resultado,ast)
-	return resultado
+func(p DeclaracionParametros) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
+	var result environment.Value
+	result = environment.NewValue(p.Id, false, p.Tipo)
+	return result
 }

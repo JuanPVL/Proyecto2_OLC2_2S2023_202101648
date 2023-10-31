@@ -4,6 +4,8 @@ import (
 	"Proyecto2_OLC2_2S2023_202101648/Environment"
 	"Proyecto2_OLC2_2S2023_202101648/interfaces"
 	"Proyecto2_OLC2_2S2023_202101648/generator"
+	//"strings"
+	//"fmt"
 	"strconv"
 )
 
@@ -20,47 +22,74 @@ func NewIf(lin int, col int, condition interfaces.Expression, bloque []interface
 	return ifInstr
 }
 
-func (p If) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Symbol {
-	var condicion environment.Symbol
-	condicion = p.Condicion.Ejecutar(ast,env)
+func (p If) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
+	gen.AddComment("****** Generando If")
+	var condicion, result environment.Value
+	var OutLvls []interface{}
+	condicion = p.Condicion.Ejecutar(ast, env, gen)
 
-	if condicion.Tipo != environment.BOOLEAN {
+	if condicion.Type != environment.BOOLEAN {
 		linea := strconv.Itoa(p.Lin)
 		columna := strconv.Itoa(p.Col)
 		ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "La condicion no es valida", Ambito: env.(environment.Environment).Id})
-		return environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: environment.NULL, Valor: nil, Mutable: true}
+		var result environment.Value
+		return result
+	}
+	newLabel := gen.NewLabel()
+	//*****************************************add true labels
+	for _, lvl := range condicion.TrueLabel {
+		gen.AddLabel(lvl.(string))
+	}
+	//instrucciones if
+	for _, s := range p.Bloque {
+		resInst := s.(interfaces.Instruction).Ejecutar(ast, env, gen)
+		// resValue := resInst
+		// if resValue.BreakFlag {
+		// 	gen.AddGoto(gen.BreakLabel)
+		// 	resValue.BreakFlag = false
+		// }
+		// if resValue.ContinueFlag {
+		// 	gen.AddGoto(gen.ContinueLabel)
+		// 	resValue.ContinueFlag = false
+		// }
+			for _, lvl := range resInst.OutLabel {
+				OutLvls = append(OutLvls, lvl)
+			}
+	}
+	//*****************************************add out labels
+	gen.AddGoto(newLabel)
+	//*****************************************add false labels
+	for _, lvl := range condicion.FalseLabel {
+		gen.AddLabel(lvl.(string))
 	}
 
-	if condicion.Valor == true {
-		var ifEnv environment.Environment
-		ifEnv = environment.NewEnvironment(env.(environment.Environment),"IF")
-		for _, inst := range p.Bloque {
-			val:=inst.(interfaces.Instruction).Ejecutar(ast,ifEnv)
-			if val.BreakFlag == true || val.Valor == "break"{
-				return val
-			} else if val.ContinueFlag == true || val.Valor == "continue"{
-				return val
-			} else if val.ReturnFlag == true {
-				return val
-			}
+	if len(p.ElseBloque) > 0 {
+		for _, s := range p.ElseBloque {
+			resInst := s.(interfaces.Instruction).Ejecutar(ast, env, gen)
+			// resValue := resInst
+			// if resValue.BreakFlag {
+			// 	gen.AddGoto(gen.BreakLabel)
+			// 	resValue.BreakFlag = false
+			// }
+			// if resValue.ContinueFlag {
+			// 	gen.AddGoto(gen.ContinueLabel)
+			// 	resValue.ContinueFlag = false
+			// }
+				//agregando etiquetas de salida
+				for _, lvl := range resInst.OutLabel {
+					OutLvls = append(OutLvls, lvl)
+				}
 		}
-		return environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: environment.NULL, Valor: nil, Mutable: true}
-	} else {
-		var elseEnv environment.Environment
-		elseEnv = environment.NewEnvironment(env.(environment.Environment),"ELSE")
-		for _, inst := range p.ElseBloque {
-			val:=inst.(interfaces.Instruction).Ejecutar(ast,elseEnv)
-			if val.BreakFlag == true || val.Valor == "break"{
-				return val
-			} else if val.ContinueFlag == true || val.Valor == "continue"{
-				return val
-			} else if val.ReturnFlag == true {
-				return val
-			}
-		}
-		return environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: environment.NULL, Valor: nil, Mutable: true}
 	}
-	return environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: environment.NULL, Valor: nil, Mutable: true}
+	OutLvls = append(OutLvls, newLabel)
+
+	copiedSlice := make([]interface{}, len(OutLvls))
+	for i, item := range OutLvls {
+		copiedSlice[i] = item
+	}
+
+	result.OutLabel = copiedSlice
+	return result
 }
 
 

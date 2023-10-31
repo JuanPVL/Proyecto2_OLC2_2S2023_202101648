@@ -16,9 +16,9 @@ func NewContinue(lin int, col int) Continue {
 	return Continue{lin,col}
 }
 
-func (p Continue) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value{
+func (p Continue) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value {
 	var resultado environment.Value
 
-	resultado = environment.NewValue("",false,environment.NULL,false,false,true)
+	resultado = environment.NewValue("",false,environment.NULL)
 	return resultado
 }

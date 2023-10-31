@@ -7,7 +7,6 @@ type Symbol struct {
 	Tipo       TipoExpresion
 	Valor      interface{}
 	Mutable    bool
-	ArrayTipo  TipoExpresion
-	VectorTipo TipoExpresion
+	ArrSize    int
 	Posicion   int
 }

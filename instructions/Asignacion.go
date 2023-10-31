@@ -19,7 +19,7 @@ func NewAsignacion(lin int, col int,id string, val interfaces.Expression) Asigna
 	return instr
 }
 
-func (va Asignacion) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) interface{} {
+func (va Asignacion) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
 	linea := strconv.Itoa(va.Lin)
 	columna := strconv.Itoa(va.Col)
 	var result environment.Value

@@ -79,6 +79,9 @@ type SwiftGrammarListener interface {
 	// EnterListArray is called when entering the listArray production.
 	EnterListArray(c *ListArrayContext)
 
+	// EnterListAccessArray is called when entering the listAccessArray production.
+	EnterListAccessArray(c *ListAccessArrayContext)
+
 	// EnterCallFuncion is called when entering the callFuncion production.
 	EnterCallFuncion(c *CallFuncionContext)
 
@@ -159,6 +162,9 @@ type SwiftGrammarListener interface {
 
 	// ExitListArray is called when exiting the listArray production.
 	ExitListArray(c *ListArrayContext)
+
+	// ExitListAccessArray is called when exiting the listAccessArray production.
+	ExitListAccessArray(c *ListAccessArrayContext)
 
 	// ExitCallFuncion is called when exiting the callFuncion production.
 	ExitCallFuncion(c *CallFuncionContext)

@@ -2,9 +2,12 @@ package expressions
 
 import (
 	"Proyecto2_OLC2_2S2023_202101648/Environment"
+	"Proyecto2_OLC2_2S2023_202101648/generator"
+	// "Proyecto2_OLC2_2S2023_202101648/instructions"
 	"Proyecto2_OLC2_2S2023_202101648/interfaces"
-	"Proyecto2_OLC2_2S2023_202101648/instructions"
 	"strconv"
+	"strings"
+	"fmt"
 )
 
 type LlamadoFuncion struct {
@@ -18,46 +21,47 @@ func NewLlamadoFuncion(lin int, col int, id string, parametros []interface{}) Ll
 	return LlamadoFuncion{lin,col,id,parametros}
 }
 
-func (lf LlamadoFuncion) Ejecutar(ast *environment.AST, env interface{}) environment.Symbol {
-	var resultado environment.Symbol
-	var funcion environment.FunctionSymbol
+func (lf LlamadoFuncion) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
+	var result environment.Value
 	linea := strconv.Itoa(lf.Lin)
 	columna := strconv.Itoa(lf.Col)
-	funcion = env.(environment.Environment).GetFunction(lf.Id,ast,linea,columna)
-	var envFuncion environment.Environment
-	envFuncion = environment.NewEnvironment(lf.GetGlobal(env),lf.Id+"(Funcion)")
+	size := env.(environment.Environment).Size["size"]
+	gen.AddComment("Inicio de llamada")
+	if len(lf.Parametros) > 0 {
+		tmp1 := gen.NewTemp()
+		gen.AddExpression(tmp1, "P", strconv.Itoa(size+1), "+")
+		for i := 0; i < len(lf.Parametros); i++ {
 
-	if len(lf.Parametros) == len(funcion.ListaParametros) {
-		for i:=0; i < len(lf.Parametros); i++ {
-			var param environment.Symbol
-			param = lf.Parametros[i].(interfaces.Expression).Ejecutar(ast,env)
-			if param.Tipo == funcion.ListaParametros[i].(instructions.DeclaracionParametros).Tipo {
-				envFuncion.SaveVariable(funcion.ListaParametros[i].(instructions.DeclaracionParametros).Id,param,ast)
+			//ejecutando parametros
+			if strings.Contains(fmt.Sprintf("%T", lf.Parametros[i]), "expressions") {
+				result = lf.Parametros[i].(interfaces.Expression).Ejecutar(ast, env, gen)
 			} else {
-				ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna,Descripcion: "El tipo de dato del parámetro no coincide", Ambito: envFuncion.Id})
-				return resultado
+				ast.SetErrors(environment.ErrorS{Lin: linea,Col: columna,Descripcion: "Error en parametros de llamada a funcion",Ambito: "bloque"})
+				fmt.Println("Error en bloque")
+			}
+			//guardando
+			gen.AddSetStack("(int)"+tmp1, result.Value)
+			if (len(lf.Parametros) - 1) != i {
+				gen.AddExpression(tmp1, tmp1, "1", "+")
 			}
 		}
+
+		gen.AddExpression("P", "P", strconv.Itoa(size), "+")
+		gen.AddCall(lf.Id)
+		gen.AddGetStack(tmp1, "(int)P")
+		gen.AddExpression("P", "P", strconv.Itoa(size), "-")
+
 	} else {
-		ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna,Descripcion: "La cantidad de parámetros no coincide", Ambito: envFuncion.Id})
-	}
+		tmp1 := gen.NewTemp()
 
-	for _,inst := range funcion.Bloque {
-		val := inst.(interfaces.Instruction).Ejecutar(ast,envFuncion)
-		if val.ReturnFlag == true {
-			if funcion.TipoRetorno == val.Tipo {
-				return val
-			} else {
-				ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna,Descripcion: "El tipo de dato del retorno no coincide", Ambito: envFuncion.Id})
-				return environment.Symbol{Lin: lf.Lin, Col: lf.Col, Tipo: environment.NULL, Valor: nil, Mutable: true}
-			}
-		} else if val.BreakFlag == true || val.Valor == "break"{
-			return val
-		} else if val.ContinueFlag == true || val.Valor == "continue"{
-			return val
-		}
+		gen.AddExpression("P", "P", strconv.Itoa(size), "+")
+		gen.AddCall(lf.Id)
+		gen.AddGetStack(tmp1, "(int)P")
+		gen.AddExpression("P", "P", strconv.Itoa(size), "-")
+
 	}
-	return resultado
+	gen.AddComment("Final de llamada")
+	return result
 }
 
 func (lf LlamadoFuncion) GetGlobal(env interface{}) environment.Environment {

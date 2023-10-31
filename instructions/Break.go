@@ -16,10 +16,10 @@ func NewBreak(lin int, col int) Break {
 	return Break{lin,col}
 }
 
-func (p Break) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value {
+func (p Break) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value{
 	var resultado environment.Value
 	
-	resultado = environment.NewValue("",false,environment.NULL,false,true,false)
+	resultado = environment.NewValue("",false,environment.NULL)
 
 	return resultado
 }

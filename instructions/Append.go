@@ -20,6 +20,7 @@ func NewAppend(lin int, col int,id string, val interfaces.Expression) Append{
 	return instr
 }
 
-func (va Append) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) interface{} {
-	return nil
+func (va Append) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
+	var result environment.Value
+	return result
 }

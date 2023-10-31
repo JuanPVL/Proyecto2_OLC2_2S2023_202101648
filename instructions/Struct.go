@@ -18,7 +18,8 @@ func NewStruct(lin int, col int, id string, list []interface{}) Struct {
 	return instr
 }
 
-func (p Struct) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) interface{} {
-	return nil
+func (p Struct) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
+	var result environment.Value
+	return result
 }
 

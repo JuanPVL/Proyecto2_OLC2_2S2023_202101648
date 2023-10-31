@@ -21,7 +21,8 @@ func NewAsignacionIndexVector(lin int, col int,id string, val1 interfaces.Expres
 	return instr
 }
 
-func (p AsignacionIndexVector) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) interface{} {
-	return nil
+func (p AsignacionIndexVector) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value {
+	var result environment.Value
+	return result
 }
 

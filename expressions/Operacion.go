@@ -1,18 +1,20 @@
 package expressions
 
-import(
-	"Proyecto2_OLC2_2S2023_202101648/Environment"
+import (
+	environment "Proyecto2_OLC2_2S2023_202101648/Environment"
+	"Proyecto2_OLC2_2S2023_202101648/generator"
 	"Proyecto2_OLC2_2S2023_202101648/interfaces"
-	"fmt"
+
+	//"fmt"
 	"strconv"
 )
 
 type Operacion struct {
-	Lin 			int
-	Col 			int
-	Operador_izq	interfaces.Expression
-	Operador 		string
-	Operador_der	interfaces.Expression
+	Lin          int
+	Col          int
+	Operador_izq interfaces.Expression
+	Operador     string
+	Operador_der interfaces.Expression
 }
 
 func NewOperation(lin int, col int, op1 interfaces.Expression, operador string, op2 interfaces.Expression) Operacion {
@@ -20,11 +22,11 @@ func NewOperation(lin int, col int, op1 interfaces.Expression, operador string, 
 	return exp
 }
 
-func (o Operacion) Ejecutar(ast *environment.AST, env interface{}) environment.Symbol {
+func (o Operacion) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value {
 	var dominante environment.TipoExpresion
 
 	tabla_dominante := [5][5]environment.TipoExpresion{
-		// INT						FLOAT				STRING			BOOLEAN					NULL	
+		// INT						FLOAT				STRING			BOOLEAN					NULL
 		{environment.INTEGER, environment.FLOAT, environment.NULL, environment.NULL, environment.NULL},
 		//FlOAT
 		{environment.FLOAT, environment.FLOAT, environment.NULL, environment.NULL, environment.NULL},
@@ -36,231 +38,325 @@ func (o Operacion) Ejecutar(ast *environment.AST, env interface{}) environment.S
 		{environment.NULL, environment.NULL, environment.NULL, environment.NULL, environment.NULL},
 	}
 
-	var op1, op2 environment.Symbol
-	op1 = o.Operador_izq.Ejecutar(ast,env)
-	if o.Operador_der != nil {
-		op2 = o.Operador_der.Ejecutar(ast,env)
-	}
+	var op1, op2, result environment.Value
+
+	newTemp := gen.NewTemp()
+
 	switch o.Operador {
-		case "+":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
+	case "+":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
 
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: op1.Valor.(int) + op2.Valor.(int), Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: val1 + val2,Mutable: true}
-				} else if dominante == environment.STRING {
-					r1 := fmt.Sprintf("%v", op1.Valor)
-					r2 := fmt.Sprintf("%v", op2.Valor)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: r1 + r2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la suma", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "-":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: op1.Valor.(int) - op2.Valor.(int),Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: val1 - val2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la resta", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "*":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: op1.Valor.(int) * op2.Valor.(int),Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: val1 * val2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la multiplicacion", Ambito: env.(environment.Environment).Id})				}
-			}
-		case "/":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					if op2.Valor.(int) != 0 {
-						return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: op1.Valor.(int) / op2.Valor.(int),Mutable: true}
-					} else {
-						linea := strconv.Itoa(o.Lin)
-						columna := strconv.Itoa(o.Col)
-						ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "No puede dividir entre cero", Ambito: env.(environment.Environment).Id})
-					}
-
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					if val2 != 0 {
-						return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: val1 / val2,Mutable: true}
-					} else {
-						linea := strconv.Itoa(o.Lin)
-						columna := strconv.Itoa(o.Col)
-						ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "No puede dividir entre cero", Ambito: env.(environment.Environment).Id})
-					}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la division", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "%":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					if op2.Valor.(int) != 0 {
-						return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: dominante, Valor: op1.Valor.(int) % op2.Valor.(int),Mutable: true}
-					} else {
-						linea := strconv.Itoa(o.Lin)
-						columna := strconv.Itoa(o.Col)
-						ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "No puede dividir entre cero", Ambito: env.(environment.Environment).Id})					}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en el modulo", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "UNARIO":
-			{
-				if op1.Tipo == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.INTEGER, Valor: -op1.Valor.(int),Mutable: true}
-				} else if op1.Tipo == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.FLOAT, Valor: -val1,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en el unario", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "<":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor.(int) < op2.Valor.(int),Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: val1 < val2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion menor que", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case ">":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor.(int) > op2.Valor.(int),Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: val1 > val2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion mayor que", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "<=":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor.(int) <= op2.Valor.(int),Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: val1 <= val2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion menor igual que", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case ">=":
-			{
-				dominante = tabla_dominante[op1.Tipo][op2.Tipo]
-				if dominante == environment.INTEGER {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor.(int) >= op2.Valor.(int),Mutable: true}
-				} else if dominante == environment.FLOAT {
-					val1, _ := strconv.ParseFloat(fmt.Sprintf("%v", op1.Valor), 64)
-					val2, _ := strconv.ParseFloat(fmt.Sprintf("%v", op2.Valor), 64)
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: val1 >= val2,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion mayor igual que", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "==":
-			{
-				if op1.Tipo == op2.Tipo {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor == op2.Valor,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion igual que", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "!=":
-			{
-				if op1.Tipo == op2.Tipo {
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor != op2.Valor,Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion diferente que", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "&&":
-			{
-				if(op1.Tipo == environment.BOOLEAN && op2.Tipo == environment.BOOLEAN){
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor.(bool) && op2.Valor.(bool),Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion AND", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "||":
-			{
-				if(op1.Tipo == environment.BOOLEAN && op2.Tipo == environment.BOOLEAN){
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: op1.Valor.(bool) || op2.Valor.(bool),Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion OR", Ambito: env.(environment.Environment).Id})
-				}
-			}
-		case "!":
-			{
-				if(op1.Tipo == environment.BOOLEAN){
-					return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.BOOLEAN, Valor: !op1.Valor.(bool),Mutable: true}
-				} else {
-					linea := strconv.Itoa(o.Lin)
-					columna := strconv.Itoa(o.Col)
-					ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en la comparacion NOT", Ambito: env.(environment.Environment).Id})
-				}
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				gen.AddExpression(newTemp, op1.Value, op2.Value, "+")
+				result = environment.NewValue(newTemp, true, dominante)
+				result.IntValue = op1.IntValue + op2.IntValue
+				return result
+			} else if dominante == environment.STRING {
+				gen.GenerateConcatString()
+				gen.AddComment("Concatenacion de string")
+				envSize := strconv.Itoa(env.(environment.Environment).Size["size"])
+				tmp1 := gen.NewTemp()
+				tmp2 := gen.NewTemp()
+				gen.AddExpression(tmp1, "P", envSize, "+")
+				gen.AddExpression(tmp1, tmp1, "1", "+")
+				gen.AddSetStack("(int)"+tmp1, op1.Value)
+				gen.AddExpression(tmp1, tmp1, "1", "+")
+				gen.AddSetStack("(int)"+tmp1, op2.Value)
+				gen.AddExpression("P", "P", envSize, "+")
+				gen.AddCall("swift_concatString")
+				gen.AddSetStack("(int)"+tmp2, "(int)P")
+				gen.AddExpression("P", "P", envSize, "-")
+				gen.AddBr()
+				result = environment.NewValue(tmp2, true, dominante)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la suma", Ambito: env.(environment.Environment).Id})
 			}
 		}
-		
-		var result interface{}
-		return environment.Symbol{Lin: o.Lin, Col: o.Col, Tipo: environment.NULL, Valor: result,Mutable: true}
+	case "-":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				gen.AddExpression(newTemp, op1.Value, op2.Value, "-")
+				result = environment.NewValue(newTemp, true, dominante)
+				result.IntValue = op1.IntValue - op2.IntValue
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la resta", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "*":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				gen.AddExpression(newTemp, op1.Value, op2.Value, "*")
+				result = environment.NewValue(newTemp, true, dominante)
+				result.IntValue = op1.IntValue * op2.IntValue
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la multiplicacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "/":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				lvl1 := gen.NewLabel()
+				lvl2 := gen.NewLabel()
+
+				gen.AddIf(op2.Value, "0", "!=", lvl1)
+				gen.AddPrintf("c", "77")
+				gen.AddPrintf("c", "97")
+				gen.AddPrintf("c", "116")
+				gen.AddPrintf("c", "104")
+				gen.AddPrintf("c", "69")
+				gen.AddPrintf("c", "114")
+				gen.AddPrintf("c", "114")
+				gen.AddPrintf("c", "111")
+				gen.AddPrintf("c", "114")
+				gen.AddExpression(newTemp, "0", "", "")
+				gen.AddGoto(lvl2)
+				gen.AddLabel(lvl1)
+				gen.AddExpression(newTemp, op1.Value, op2.Value, "/")
+				gen.AddLabel(lvl2)
+				result = environment.NewValue(newTemp, true, dominante)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la division", Ambito: env.(environment.Environment).Id})
+			}
+
+		}
+
+	case "%":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				lvl1 := gen.NewLabel()
+				lvl2 := gen.NewLabel()
+
+				gen.AddIf(op2.Value, "0", "!=", lvl1)
+				gen.AddPrintf("c", "77")
+				gen.AddPrintf("c", "97")
+				gen.AddPrintf("c", "116")
+				gen.AddPrintf("c", "104")
+				gen.AddPrintf("c", "69")
+				gen.AddPrintf("c", "114")
+				gen.AddPrintf("c", "114")
+				gen.AddPrintf("c", "111")
+				gen.AddPrintf("c", "114")
+				gen.AddExpression(newTemp, "0", "", "")
+				gen.AddGoto(lvl2)
+				gen.AddLabel(lvl1)
+				gen.AddExpression(newTemp, "(int)"+op1.Value,"(int)"+op2.Value, "%")
+				gen.AddLabel(lvl2)
+				result = environment.NewValue(newTemp, true, dominante)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la division", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "UNARIO":
+		{
+			if op1.Type == environment.INTEGER || op1.Type == environment.FLOAT {
+				gen.AddExpression(newTemp, op1.Value, "-1", "*")
+				result = environment.NewValue(newTemp, true, dominante)
+				result.IntValue = op1.IntValue * -1
+				return result
+			} else {
+				linea := strconv.Itoa(o.Lin)
+				columna := strconv.Itoa(o.Col)
+				ast.SetErrors(environment.ErrorS{Lin: linea, Col: columna, Descripcion: "Error de tipos en el unario", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "<":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				trueLabel := gen.NewLabel()
+				falseLabel := gen.NewLabel()
+
+				gen.AddIf(op1.Value, op2.Value, "<", trueLabel)
+				gen.AddGoto(falseLabel)
+
+				result = environment.NewValue(newTemp, true, environment.BOOLEAN)
+				result.TrueLabel = append(result.TrueLabel, trueLabel)
+				result.FalseLabel = append(result.FalseLabel, falseLabel)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la comparacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case ">":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				trueLabel := gen.NewLabel()
+				falseLabel := gen.NewLabel()
+
+				gen.AddIf(op1.Value, op2.Value, ">", trueLabel)
+				gen.AddGoto(falseLabel)
+
+				result = environment.NewValue(newTemp, true, environment.BOOLEAN)
+				result.TrueLabel = append(result.TrueLabel, trueLabel)
+				result.FalseLabel = append(result.FalseLabel, falseLabel)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la comparacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "<=":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				trueLabel := gen.NewLabel()
+				falseLabel := gen.NewLabel()
+
+				gen.AddIf(op1.Value, op2.Value, "<=", trueLabel)
+				gen.AddGoto(falseLabel)
+
+				result = environment.NewValue(newTemp, true, environment.BOOLEAN)
+				result.TrueLabel = append(result.TrueLabel, trueLabel)
+				result.FalseLabel = append(result.FalseLabel, falseLabel)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la comparacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case ">=":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				trueLabel := gen.NewLabel()
+				falseLabel := gen.NewLabel()
+
+				gen.AddIf(op1.Value, op2.Value, ">=", trueLabel)
+				gen.AddGoto(falseLabel)
+
+				result = environment.NewValue(newTemp, true, environment.BOOLEAN)
+				result.TrueLabel = append(result.TrueLabel, trueLabel)
+				result.FalseLabel = append(result.FalseLabel, falseLabel)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la comparacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "==":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				trueLabel := gen.NewLabel()
+				falseLabel := gen.NewLabel()
+
+				gen.AddIf(op1.Value, op2.Value, "==", trueLabel)
+				gen.AddGoto(falseLabel)
+
+				result = environment.NewValue(newTemp, true, environment.BOOLEAN)
+				result.TrueLabel = append(result.TrueLabel, trueLabel)
+				result.FalseLabel = append(result.FalseLabel, falseLabel)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la comparacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "!=":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+			dominante = tabla_dominante[op1.Type][op2.Type]
+
+			if dominante == environment.INTEGER || dominante == environment.FLOAT {
+				trueLabel := gen.NewLabel()
+				falseLabel := gen.NewLabel()
+
+				gen.AddIf(op1.Value, op2.Value, "!=", trueLabel)
+				gen.AddGoto(falseLabel)
+
+				result = environment.NewValue(newTemp, true, environment.BOOLEAN)
+				result.TrueLabel = append(result.TrueLabel, trueLabel)
+				result.FalseLabel = append(result.FalseLabel, falseLabel)
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la comparacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	case "&&":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+
+			for _, lvl := range op1.TrueLabel {
+				gen.AddLabel(lvl.(string))
+			}
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+
+			result = environment.NewValue("", false, environment.BOOLEAN)
+			result.TrueLabel = append(op2.TrueLabel, result.TrueLabel...)
+			result.FalseLabel = append(op1.FalseLabel, result.FalseLabel...)
+			result.FalseLabel = append(op2.FalseLabel, result.FalseLabel...)
+			return result
+		}
+	case "||":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+
+			for _, lvl := range op1.TrueLabel {
+				gen.AddLabel(lvl.(string))
+			}
+			op2 = o.Operador_der.Ejecutar(ast, env, gen)
+
+			result = environment.NewValue("", false, environment.BOOLEAN)
+			result.TrueLabel = append(op2.TrueLabel, result.TrueLabel...)
+			result.FalseLabel = append(op1.FalseLabel, result.FalseLabel...)
+			result.FalseLabel = append(op2.FalseLabel, result.FalseLabel...)
+			return result
+
+		}
+	case "!":
+		{
+			op1 = o.Operador_izq.Ejecutar(ast, env, gen)
+			if op1.Type == environment.BOOLEAN {
+				result = environment.NewValue("", false, environment.BOOLEAN)
+
+				for _, lvl := range op1.TrueLabel {
+					result.FalseLabel = append(result.FalseLabel, lvl)
+				}
+				for _, lvl := range op1.FalseLabel {
+					result.TrueLabel = append(result.TrueLabel, lvl)
+				}
+				return result
+			} else {
+				ast.SetErrors(environment.ErrorS{Lin: strconv.Itoa(o.Lin), Col: strconv.Itoa(o.Col), Descripcion: "Error de tipos en la negacion", Ambito: env.(environment.Environment).Id})
+			}
+		}
+	}
+
+	gen.AddBr()
+	return environment.Value{}
 }

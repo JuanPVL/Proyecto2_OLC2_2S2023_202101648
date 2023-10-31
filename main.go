@@ -5,9 +5,10 @@ import (
 	"Proyecto2_OLC2_2S2023_202101648/generator"
 	"Proyecto2_OLC2_2S2023_202101648/interfaces"
 	"Proyecto2_OLC2_2S2023_202101648/parser"
-	"fmt"
+
+	//"fmt"
 	"strconv"
-	"strings"
+	//"strings"
 
 	"github.com/antlr4-go/antlr/v4"
 	"github.com/gofiber/fiber/v2"
@@ -64,14 +65,10 @@ func handleInterpreter(c *fiber.Ctx) error {
 	Generator.MainCode = true
 	//ejecución
 	for _, bloc := range Code {
-		if strings.Contains(fmt.Sprintf("%T", bloc), "instructions") {
-			resInst := bloc.(interfaces.Instruction).Ejecutar(&Ast, globalEnv, &Generator)
-			if resInst != nil {
-				//agregando etiquetas de salida
-				for _, lvl := range resInst.(environment.Value).OutLabel {
-					Generator.AddLabel(lvl.(string))
-				}
-			}
+		resInst := bloc.(interfaces.Instruction).Ejecutar(&Ast, globalEnv, &Generator)
+		//agregando etiquetas de salida
+		for _, lvl := range resInst.OutLabel {
+			Generator.AddLabel(lvl.(string))
 		}
 	}
 
@@ -99,6 +96,10 @@ func handleInterpreter(c *fiber.Ctx) error {
 		graphTS += "<tr><td>" + simbolito.(environment.SimbolTabla).Id + "</td><td>" + simbolito.(environment.SimbolTabla).TipoSimbolo + "</td><td>" + simbolito.(environment.SimbolTabla).TipoDato + "</td><td>" + simbolito.(environment.SimbolTabla).Ambito + "</td><td>" + simbolito.(environment.SimbolTabla).Lin + "</td><td>" + simbolito.(environment.SimbolTabla).Col + "</td></tr>\n"
 	}
 	graphTS += "</table>>];\n}"
+
+	for _, item := range Generator.GetFinalCode() {
+		ConsoleOut += item.(string)
+	}
 
 	response := Resp{
 		Output:     ConsoleOut,

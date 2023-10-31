@@ -5,27 +5,29 @@ import (
 )
 
 type Generator struct {
-	Temporal        int
-	Label           int
-	Code            []interface{}
-	FinalCode       []interface{}
-	Natives         []interface{}
-	FuncCode        []interface{}
-	TempList        []interface{}
-	PrintStringFlag bool
-	BreakLabel      string
-	ContinueLabel   string
-	MainCode        bool
+	Temporal         int
+	Label            int
+	Code             []interface{}
+	FinalCode        []interface{}
+	Natives          []interface{}
+	FuncCode         []interface{}
+	TempList         []interface{}
+	PrintStringFlag  bool
+	ConcatStringFlag bool
+	BreakLabel       string
+	ContinueLabel    string
+	MainCode         bool
 }
 
 func NewGenerator() Generator {
 	generator := Generator{
-		Temporal:        0,
-		Label:           0,
-		BreakLabel:      "",
-		ContinueLabel:   "",
-		PrintStringFlag: true,
-		MainCode:        false,
+		Temporal:         0,
+		Label:            0,
+		BreakLabel:       "",
+		ContinueLabel:    "",
+		PrintStringFlag:  true,
+		ConcatStringFlag: true,
+		MainCode:         false,
 	}
 	return generator
 }
@@ -251,7 +253,7 @@ func (g *Generator) GeneratePrintString() {
 		newLvl1 := g.NewLabel()
 		newLvl2 := g.NewLabel()
 		//se genera la funcion printstring
-		g.Natives = append(g.Natives, "void dbrust_printString() {\n")
+		g.Natives = append(g.Natives, "void swift_printString() {\n")
 		g.Natives = append(g.Natives, "\t"+newTemp1+" = P + 1;\n")
 		g.Natives = append(g.Natives, "\t"+newTemp2+" = stack[(int)"+newTemp1+"];\n")
 		g.Natives = append(g.Natives, "\t"+newLvl2+":\n")
@@ -264,5 +266,49 @@ func (g *Generator) GeneratePrintString() {
 		g.Natives = append(g.Natives, "\treturn;\n")
 		g.Natives = append(g.Natives, "}\n\n")
 		g.PrintStringFlag = false
+	}
+}
+
+func (g *Generator) GenerateConcatString() {
+	if g.ConcatStringFlag {
+		//generando temporales y etiquetas
+		tmp1 := g.NewTemp()
+		tmp2 := g.NewTemp()
+		tmp3 := g.NewTemp()
+		tmp4 := g.NewTemp()
+		tmp5 := g.NewTemp()
+		lvl1 := g.NewLabel()
+		lvl2 := g.NewLabel()
+		lvl3 := g.NewLabel()
+		lvl4 := g.NewLabel()
+		//se genera la funcion printstring
+		g.Natives = append(g.Natives, "void swift_concatString() {\n")
+		g.Natives = append(g.Natives, "\t"+tmp1+" = H;"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp2+" = P + 1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp4+" = stack[(int)"+tmp2+"];"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp3+" = P + 2;"+"\n")
+		g.Natives = append(g.Natives, "\t"+lvl2+":"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp5+" = heap[(int)"+tmp4+"];"+"\n")
+		g.Natives = append(g.Natives, "\t"+"if("+tmp5+" == -1) goto "+lvl3+";"+"\n")
+		g.Natives = append(g.Natives, "\t"+"heap[(int)H] = "+tmp5+";"+"\n")
+		g.Natives = append(g.Natives, "\t"+"H = H + 1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp4+" = "+tmp4+" + 1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+"goto "+lvl2+";"+"\n")
+		g.Natives = append(g.Natives, "\t"+lvl3+":"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp4+" = stack[(int)"+tmp3+"];"+"\n")
+		g.Natives = append(g.Natives, "\t"+lvl4+":"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp5+" = heap[(int)"+tmp4+"];"+"\n")
+		g.Natives = append(g.Natives, "\t"+"if("+tmp5+" == -1) goto "+lvl1+";"+"\n")
+		g.Natives = append(g.Natives, "\t"+"heap[(int)H] = "+tmp5+";"+"\n")
+		g.Natives = append(g.Natives, "\t"+"H = H + 1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+tmp4+" = "+tmp4+" + 1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+"goto "+lvl4+";"+"\n")
+		g.Natives = append(g.Natives, "\t"+lvl1+":"+"\n")
+		g.Natives = append(g.Natives, "\t"+"heap[(int)H] = -1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+"H = H + 1;"+"\n")
+		g.Natives = append(g.Natives, "\t"+"stack[(int)P] = "+tmp1+";"+"\n")
+		g.Natives = append(g.Natives, "\treturn;\n")
+		g.Natives = append(g.Natives, "}\n\n")
+		g.ConcatStringFlag = false
 	}
 }

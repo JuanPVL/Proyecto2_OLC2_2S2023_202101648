@@ -6,10 +6,10 @@ options {
 }
 
 @header {
-    import "Proyecto1_OLC2_2S2023_202101648/interfaces"
-    import "Proyecto1_OLC2_2S2023_202101648/Environment"
-    import "Proyecto1_OLC2_2S2023_202101648/expressions"
-    import "Proyecto1_OLC2_2S2023_202101648/instructions"
+    import "Proyecto2_OLC2_2S2023_202101648/interfaces"
+    import "Proyecto2_OLC2_2S2023_202101648/Environment"
+    import "Proyecto2_OLC2_2S2023_202101648/expressions"
+    import "Proyecto2_OLC2_2S2023_202101648/instructions"
     import "strings"
 }
 
@@ -181,6 +181,7 @@ types returns[environment.TipoExpresion ty]
 | FLOAT { $ty = environment.FLOAT }
 | STR { $ty = environment.STRING }
 | BOOL { $ty = environment.BOOLEAN }
+| COR_IZQ COR_DER { $ty = environment.ARRAY}
 ;
 
 typesmatriz returns[[]interface{} tm]
@@ -271,9 +272,21 @@ listParams returns[[]interface{} l]
 ;
 
 listArray returns[interfaces.Expression p]
-: list = listArray COR_IZQ expr COR_DER { $p = expressions.NewArrayAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $expr.e) }
+: list = listArray arr = listAccessArray { $p = expressions.NewArrayAccess($ID.line, $ID.pos, $list.p, $arr.l) }
 |list = listArray PUNTO ID { $p = expressions.NewStructAccess($list.start.GetLine(), $list.start.GetColumn(), $list.p, $ID.text)  }
 | ID { $p = expressions.NewLlamadoVar($ID.line, $ID.pos, $ID.text)}
+;
+
+listAccessArray returns[[]interface{} l]
+: list = listAccessArray COR_IZQ expr COR_DER {
+                                                var arr []interface{}
+                                                arr = append($list.l, $expr.e)
+                                                $l = arr
+                                            } 
+| COR_IZQ expr COR_DER    {
+                            $l = []interface{}{}
+                            $l = append($l, $expr.e)
+                        }
 ;
 
 callFuncion returns[interfaces.Expression cf]

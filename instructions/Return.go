@@ -17,13 +17,7 @@ func NewReturn(lin int, col int, exp interfaces.Expression) Return {
 	return Return{lin,col,exp}
 }
 
-func (p Return) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Symbol {
-	var resultado environment.Symbol
-	if p.Expression != nil {
-		tmpvalor := p.Expression.Ejecutar(ast,env)
-		resultado = environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: tmpvalor.Tipo, Valor: tmpvalor.Valor, Mutable: true,ReturnFlag: true, VectorTipo: tmpvalor.VectorTipo}
-	} else {
-		resultado = environment.Symbol{Lin: p.Lin, Col: p.Col, Tipo: environment.NULL, Valor: nil, Mutable: true,ReturnFlag: true}
-	}
-	return resultado
+func (p Return) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
+	var result environment.Value
+	return result
 }
