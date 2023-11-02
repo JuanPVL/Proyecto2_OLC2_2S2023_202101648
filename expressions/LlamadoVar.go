@@ -40,7 +40,7 @@ func (p LlamadoVar) Ejecutar(ast *environment.AST, env interface{}, gen *generat
 		result = environment.NewValue("", false, environment.BOOLEAN, false, false, false)
 		result.TrueLabel = append(result.TrueLabel, trueLabel)
 		result.FalseLabel = append(result.FalseLabel, falseLabel)
-	} else if retSym.Tipo == environment.ARRAY {
+	} else if retSym.Tipo == environment.ARRAY || retSym.Tipo == environment.VECTOR {
 		gen.AddExpression(newTemp2, newTemp2, strconv.Itoa(retSym.Posicion), "+")
 		result = environment.NewValue(newTemp2, true, retSym.Tipo, false, false, false)
 		result.ArrSize = retSym.ArrSize
