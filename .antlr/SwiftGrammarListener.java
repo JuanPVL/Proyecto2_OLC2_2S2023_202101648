@@ -1,9 +1,9 @@
 // Generated from c:/Users/USUARIO/Desktop/Proyecto2_OLC2_2S2023_202101648/SwiftGrammar.g4 by ANTLR 4.13.1
 
-    import "Proyecto1_OLC2_2S2023_202101648/interfaces"
-    import "Proyecto1_OLC2_2S2023_202101648/Environment"
-    import "Proyecto1_OLC2_2S2023_202101648/expressions"
-    import "Proyecto1_OLC2_2S2023_202101648/instructions"
+    import "Proyecto2_OLC2_2S2023_202101648/interfaces"
+    import "Proyecto2_OLC2_2S2023_202101648/Environment"
+    import "Proyecto2_OLC2_2S2023_202101648/expressions"
+    import "Proyecto2_OLC2_2S2023_202101648/instructions"
     import "strings"
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -253,6 +253,16 @@ public interface SwiftGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitListArray(SwiftGrammarParser.ListArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SwiftGrammarParser#listAccessArray}.
+	 * @param ctx the parse tree
+	 */
+	void enterListAccessArray(SwiftGrammarParser.ListAccessArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SwiftGrammarParser#listAccessArray}.
+	 * @param ctx the parse tree
+	 */
+	void exitListAccessArray(SwiftGrammarParser.ListAccessArrayContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SwiftGrammarParser#callFuncion}.
 	 * @param ctx the parse tree

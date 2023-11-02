@@ -18,7 +18,6 @@ func NewArray(lin int, col int, list []interface{}) Array {
 }
 
 func (p Array) Ejecutar(ast *environment.AST,env interface{},gen *generator.Generator) environment.Value {
-	
 	var result environment.Value
 	//array con values a retornar
 	var arrVal = []interface{}{}

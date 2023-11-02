@@ -22,12 +22,12 @@ func NewPrimitive(lin int, col int, valor interface{}, tipo environment.TipoExpr
 func (p Primitivo) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value {
 	var result environment.Value
 	if p.Tipo == environment.INTEGER {
-		result = environment.NewValue(fmt.Sprintf("%v", p.Valor), false, p.Tipo)
+		result = environment.NewValue(fmt.Sprintf("%v", p.Valor), false, p.Tipo, false, false, false)
 		result.IntValue = p.Valor.(int)
 	} else if p.Tipo == environment.FLOAT {
-		result = environment.NewValue(fmt.Sprintf("%v", p.Valor), false, p.Tipo)
+		result = environment.NewValue(fmt.Sprintf("%v", p.Valor), false, p.Tipo, false, false, false)
 	} else if p.Tipo == environment.NULL {
-		result = environment.NewValue("nil", true, p.Tipo)
+		result = environment.NewValue("nil", true, p.Tipo, false, false, false)
 	} else if p.Tipo == environment.STRING {
 		//nuevo temporal
 		newTemp := gen.NewTemp()
@@ -46,7 +46,7 @@ func (p Primitivo) Ejecutar(ast *environment.AST, env interface{}, gen *generato
 		gen.AddSetHeap("(int)H", "-1")
 		gen.AddExpression("H", "H", "1", "+")
 		gen.AddBr()
-		result = environment.NewValue(newTemp, true, p.Tipo)
+		result = environment.NewValue(newTemp, true, p.Tipo, false, false, false)
 		//result = environment.Value{Value: newTemp, IsTemp: true, Type: p.Tipo}
 	} else if p.Tipo == environment.BOOLEAN {
 		gen.AddComment("Primitivo bool")
@@ -57,7 +57,7 @@ func (p Primitivo) Ejecutar(ast *environment.AST, env interface{}, gen *generato
 		} else {
 			gen.AddGoto(falseLabel)
 		}
-		result = environment.NewValue("", false, environment.BOOLEAN)
+		result = environment.NewValue("", false, environment.BOOLEAN, false, false, false)
 		result.TrueLabel = append(result.TrueLabel, trueLabel)
 		result.FalseLabel = append(result.FalseLabel, falseLabel)
 	}

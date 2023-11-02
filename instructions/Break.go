@@ -19,7 +19,7 @@ func NewBreak(lin int, col int) Break {
 func (p Break) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value{
 	var resultado environment.Value
 	
-	resultado = environment.NewValue("",false,environment.NULL)
+	resultado = environment.NewValue("",false,environment.NULL,false,true,false)
 
 	return resultado
 }

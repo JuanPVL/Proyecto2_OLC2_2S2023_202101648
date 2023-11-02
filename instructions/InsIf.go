@@ -43,15 +43,14 @@ func (p If) Ejecutar(ast *environment.AST, env interface{},gen *generator.Genera
 	//instrucciones if
 	for _, s := range p.Bloque {
 		resInst := s.(interfaces.Instruction).Ejecutar(ast, env, gen)
-		// resValue := resInst
-		// if resValue.BreakFlag {
-		// 	gen.AddGoto(gen.BreakLabel)
-		// 	resValue.BreakFlag = false
-		// }
-		// if resValue.ContinueFlag {
-		// 	gen.AddGoto(gen.ContinueLabel)
-		// 	resValue.ContinueFlag = false
-		// }
+		if resInst.BreakFlag {
+			gen.AddGoto(gen.BreakLabel)
+			resInst.BreakFlag = false
+		}
+		if resInst.ContinueFlag {
+			gen.AddGoto(gen.ContinueLabel)
+			resInst.ContinueFlag = false
+		}
 			for _, lvl := range resInst.OutLabel {
 				OutLvls = append(OutLvls, lvl)
 			}
@@ -66,15 +65,15 @@ func (p If) Ejecutar(ast *environment.AST, env interface{},gen *generator.Genera
 	if len(p.ElseBloque) > 0 {
 		for _, s := range p.ElseBloque {
 			resInst := s.(interfaces.Instruction).Ejecutar(ast, env, gen)
-			// resValue := resInst
-			// if resValue.BreakFlag {
-			// 	gen.AddGoto(gen.BreakLabel)
-			// 	resValue.BreakFlag = false
-			// }
-			// if resValue.ContinueFlag {
-			// 	gen.AddGoto(gen.ContinueLabel)
-			// 	resValue.ContinueFlag = false
-			// }
+
+			if resInst.BreakFlag {
+				gen.AddGoto(gen.BreakLabel)
+				resInst.BreakFlag = false
+			}
+			if resInst.ContinueFlag {
+				gen.AddGoto(gen.ContinueLabel)
+				resInst.ContinueFlag = false
+			}
 				//agregando etiquetas de salida
 				for _, lvl := range resInst.OutLabel {
 					OutLvls = append(OutLvls, lvl)

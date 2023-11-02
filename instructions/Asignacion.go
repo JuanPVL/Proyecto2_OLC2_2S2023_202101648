@@ -25,7 +25,7 @@ func (va Asignacion) Ejecutar(ast *environment.AST, env interface{},gen *generat
 	var result environment.Value
 	gen.AddComment("Generando Asignacion")
 	//verificar si existe la variable
-	variable := env.(*environment.Environment).GetVariable(va.Id,ast,linea,columna)
+	variable := env.(environment.Environment).GetVariable(va.Id,ast,linea,columna)
 
 	result = va.Expresion.Ejecutar(ast,env,gen)
 

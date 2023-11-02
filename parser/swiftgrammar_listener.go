@@ -37,6 +37,18 @@ type SwiftGrammarListener interface {
 	// EnterGuardstmt is called when entering the guardstmt production.
 	EnterGuardstmt(c *GuardstmtContext)
 
+	// EnterListcases is called when entering the listcases production.
+	EnterListcases(c *ListcasesContext)
+
+	// EnterCasestmt is called when entering the casestmt production.
+	EnterCasestmt(c *CasestmtContext)
+
+	// EnterInstdefault is called when entering the instdefault production.
+	EnterInstdefault(c *InstdefaultContext)
+
+	// EnterSwitchstmt is called when entering the switchstmt production.
+	EnterSwitchstmt(c *SwitchstmtContext)
+
 	// EnterForstmt is called when entering the forstmt production.
 	EnterForstmt(c *ForstmtContext)
 
@@ -120,6 +132,18 @@ type SwiftGrammarListener interface {
 
 	// ExitGuardstmt is called when exiting the guardstmt production.
 	ExitGuardstmt(c *GuardstmtContext)
+
+	// ExitListcases is called when exiting the listcases production.
+	ExitListcases(c *ListcasesContext)
+
+	// ExitCasestmt is called when exiting the casestmt production.
+	ExitCasestmt(c *CasestmtContext)
+
+	// ExitInstdefault is called when exiting the instdefault production.
+	ExitInstdefault(c *InstdefaultContext)
+
+	// ExitSwitchstmt is called when exiting the switchstmt production.
+	ExitSwitchstmt(c *SwitchstmtContext)
 
 	// ExitForstmt is called when exiting the forstmt production.
 	ExitForstmt(c *ForstmtContext)

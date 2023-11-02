@@ -1,9 +1,13 @@
 package expressions
 
-import(
+import (
 	"Proyecto2_OLC2_2S2023_202101648/Environment"
-	"Proyecto2_OLC2_2S2023_202101648/interfaces"
 	"Proyecto2_OLC2_2S2023_202101648/generator"
+	"Proyecto2_OLC2_2S2023_202101648/interfaces"
+	"fmt"
+
+	//"fmt"
+
 	//"fmt"
 	"strconv"
 )
@@ -21,15 +25,16 @@ func NewArrayAccess(lin int, col int, array interfaces.Expression, index []inter
 }
 
 func (p ArrayAccess) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
-
 	var result environment.Value
 	result = p.Array.Ejecutar(ast, env, gen) //t1, true, ARRAY, size
 	//variables RM
 	In := 0
 	Nn := result.ArrSize
+
+
 	var FinalIndex int
 	//validacion array
-	if result.Type == environment.ARRAY {
+	if result.Type == environment.ARRAY || result.Type == environment.VECTOR {
 		//agregando primera dimension
 		firstIndex := p.Index[0].(interfaces.Expression).Ejecutar(ast, env, gen)
 		i, _ := strconv.Atoi(firstIndex.Value)
@@ -52,6 +57,31 @@ func (p ArrayAccess) Ejecutar(ast *environment.AST, env interface{},gen *generat
 			FinalIndex = FinalIndex*Nn + j - In
 		}
 		// FinalIndex += 1
+		fmt.Println("FinalIndex: ", FinalIndex)
+
+		//validacion array
+		lvl1 := gen.NewLabel()
+		lvl2 := gen.NewLabel()
+		lvl3 := gen.NewLabel()
+
+		gen.AddIf(strconv.Itoa(FinalIndex), "0", ">=", lvl1)
+		gen.AddLabel(lvl1)
+		gen.AddIf(strconv.Itoa(FinalIndex), strconv.Itoa(Nn), "<=", lvl2)
+		gen.AddPrintf("c","66")
+		gen.AddPrintf("c","111")
+		gen.AddPrintf("c","117")
+		gen.AddPrintf("c","110")
+		gen.AddPrintf("c","100")
+		gen.AddPrintf("c","115")
+		gen.AddPrintf("c","69")
+		gen.AddPrintf("c","114")
+		gen.AddPrintf("c","114")
+		gen.AddPrintf("c","111")
+		gen.AddPrintf("c","114")
+		gen.AddPrintf("c","10")
+		gen.AddGoto(lvl3)
+		gen.AddLabel(lvl2)
+		
 		//accediendo al arreglo
 		newTmp := gen.NewTemp()
 		//se obtiene el array
@@ -65,8 +95,9 @@ func (p ArrayAccess) Ejecutar(ast *environment.AST, env interface{},gen *generat
 		gen.AddGetStack(newTmp2, "(int)"+newTmp)
 
 		//ToDo: to change
-		result = environment.NewValue(newTmp2, true, environment.INTEGER)
+		result = environment.NewValue(newTmp2, true, environment.INTEGER, false, false, false)
 		// result.ArrType = tempArray.ArrType
+		gen.AddLabel(lvl3)
 	}
 
 	return result

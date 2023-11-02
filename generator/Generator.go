@@ -74,6 +74,11 @@ func (g *Generator) NewLabel() string {
 	return "L" + fmt.Sprintf("%v", temp)
 }
 
+//Reductor Label para switch
+func (g *Generator) ReducLabel() {
+	g.Label = g.Label - 1
+}
+
 // generar nuevo label
 func (g *Generator) AddLabel(Label string) {
 	if g.MainCode {

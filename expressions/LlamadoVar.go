@@ -37,11 +37,15 @@ func (p LlamadoVar) Ejecutar(ast *environment.AST, env interface{}, gen *generat
 		falseLabel := gen.NewLabel()
 		gen.AddIf(newTemp2, "1", "==", trueLabel)
 		gen.AddGoto(falseLabel)
-		result = environment.NewValue("", false, environment.BOOLEAN)
+		result = environment.NewValue("", false, environment.BOOLEAN, false, false, false)
 		result.TrueLabel = append(result.TrueLabel, trueLabel)
 		result.FalseLabel = append(result.FalseLabel, falseLabel)
+	} else if retSym.Tipo == environment.ARRAY {
+		gen.AddExpression(newTemp2, newTemp2, strconv.Itoa(retSym.Posicion), "+")
+		result = environment.NewValue(newTemp2, true, retSym.Tipo, false, false, false)
+		result.ArrSize = retSym.ArrSize
 	} else {
-		result = environment.NewValue(newTemp2, true, retSym.Tipo)
+		result = environment.NewValue(newTemp2, true, retSym.Tipo, false, false, false)
 		result.ArrSize = retSym.ArrSize
 	}
 	return result

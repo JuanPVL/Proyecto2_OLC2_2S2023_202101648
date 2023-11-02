@@ -5,7 +5,7 @@ import(
 	"Proyecto2_OLC2_2S2023_202101648/interfaces"
 	"Proyecto2_OLC2_2S2023_202101648/generator"
 	"strconv"
-	"fmt"
+	//"fmt"
 )
 
 type Declaracion struct {
@@ -49,7 +49,7 @@ func (p Declaracion) Ejecutar(ast *environment.AST, env interface{},gen *generat
 		gen.AddBr()
 	} else if result.Type == environment.ARRAY {
 		newVar = env.(environment.Environment).SaveArrayVariable(p.Id,linea,columna, environment.INTEGER, len(result.ArrValue),ast)
-		fmt.Println("newVar: ", newVar)
+		//fmt.Println("newVar: ", newVar)
 		gen.AddComment("Iniciando la declaración de un ARRAY")
 		p.ArrayValidation(ast, env, gen, result.ArrValue)
 		gen.AddComment("Se finalizó la declaración de un ARRAY")

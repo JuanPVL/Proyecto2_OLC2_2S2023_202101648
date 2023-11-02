@@ -43,6 +43,7 @@ instruction returns [interfaces.Instruction inst]
 | whilestmt { $inst = $whilestmt.whileinst }
 | forstmt { $inst = $forstmt.forinst }
 | guardstmt { $inst = $guardstmt.gd }
+| switchstmt { $inst = $switchstmt.sw }
 | function {$inst = $function.fun}
 | structCreation { $inst = $structCreation.dec }
 | callFuncionIns (PUNTOCOMA)? {$inst = $callFuncionIns.cf}
@@ -119,6 +120,33 @@ guardstmt returns [interfaces.Instruction gd]
 : GUARD expr ELSE LLAVE_IZQ block LLAVE_DER { $gd = instructions.NewGuard($GUARD.line, $GUARD.pos, $expr.e, $block.blk) }
 ;
 
+listcases returns [[]interface{} lcas]
+@init{
+    $lcas = []interface{}{}
+    var listCase []ICasestmtContext
+    }
+: cases+=casestmt+ 
+    {
+        listCase = localctx.(*ListcasesContext).GetCases()
+        for _, e := range listCase {
+            $lcas = append($lcas, e.GetCaseinst())
+        }
+    }
+;
+
+casestmt returns [interfaces.Instruction caseinst]
+:CASE expr DOSPUNTOS block { $caseinst = instructions.NewCase($CASE.line, $CASE.pos, $expr.e, $block.blk) }
+;
+
+instdefault returns [interfaces.Instruction instdef]
+:DEFAULT DOSPUNTOS block { $instdef = instructions.NewDefault($DEFAULT.line, $DEFAULT.pos,$block.blk) }
+;
+
+switchstmt returns [interfaces.Instruction sw]
+: SWITCH expr LLAVE_IZQ listcases instdefault LLAVE_DER { $sw = instructions.NewSwitch($SWITCH.line, $SWITCH.pos, $expr.e, $listcases.lcas,$instdefault.instdef) }
+| SWITCH expr LLAVE_IZQ listcases LLAVE_DER { $sw = instructions.NewSwitch($SWITCH.line, $SWITCH.pos, $expr.e,$listcases.lcas, nil)}
+;
+
 forstmt returns [interfaces.Instruction forinst]
 : FOR ID IN exprFor LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, $exprFor.e, $block.blk)}
 ;
@@ -129,6 +157,7 @@ declarationstmt returns [interfaces.Instruction dec]
 | VAR ID DOSPUNTOS types CIERRAPREGUNTA { $dec = instructions.NewDeclaracion($VAR.line, $VAR.pos, $ID.text,true, $types.ty, nil) }
 | VAR ID DOSPUNTOS COR_IZQ types COR_DER IGUAL exprvector { $dec = instructions.NewDeclaracionVector($VAR.line, $VAR.pos, $ID.text,true, $types.ty, $exprvector.exprv) }
 |VAR ID DOSPUNTOS typesmatriz IGUAL expr  { $dec = instructions.NewDeclaracionMatriz($VAR.line, $VAR.pos, $ID.text,true, $typesmatriz.tm, $expr.e) }
+|LET ID DOSPUNTOS typesmatriz IGUAL expr  { $dec = instructions.NewDeclaracionMatriz($LET.line, $LET.pos, $ID.text,false, $typesmatriz.tm, $expr.e) }
 | LET ID DOSPUNTOS types IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false, $types.ty, $expr.e) }
 | LET ID IGUAL expr { $dec = instructions.NewDeclaracion($LET.line, $LET.pos, $ID.text,false,environment.DEPENDIENTE, $expr.e) }
 ;

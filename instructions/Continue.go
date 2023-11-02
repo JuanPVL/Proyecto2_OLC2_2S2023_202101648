@@ -19,6 +19,6 @@ func NewContinue(lin int, col int) Continue {
 func (p Continue) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Generator) environment.Value {
 	var resultado environment.Value
 
-	resultado = environment.NewValue("",false,environment.NULL)
+	resultado = environment.NewValue("",false,environment.NULL,false,false,true)
 	return resultado
 }

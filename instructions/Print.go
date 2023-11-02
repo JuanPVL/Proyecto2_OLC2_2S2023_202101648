@@ -24,7 +24,7 @@ func (p Print) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Ge
 		result = valor.(interfaces.Expression).Ejecutar(ast, env, gen)
 		if result.Type == environment.INTEGER || result.Type == environment.FLOAT || result.Type == environment.ARRAY {
 			gen.AddPrintf("d", "(int)"+fmt.Sprintf("%v", result.Value))
-			gen.AddPrintf("c", "10")
+			gen.AddPrintf("c", "32")
 			gen.AddBr()
 		} else if result.Type == environment.BOOLEAN {
 			if result.IsTemp {
@@ -50,7 +50,7 @@ func (p Print) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Ge
 			gen.AddPrintf("c", "(char)115")
 			gen.AddPrintf("c", "(char)101")
 			gen.AddLabel(newLabel)
-			gen.AddPrintf("c", "10")
+			gen.AddPrintf("c", "32")
 			gen.AddBr()
 		} else if result.Type == environment.STRING {
 			//llamar a generar printstring
@@ -66,16 +66,16 @@ func (p Print) Ejecutar(ast *environment.AST, env interface{}, gen *generator.Ge
 			gen.AddCall("swift_printString")                //Llamada
 			gen.AddGetStack(newTemp2, "(int)P")             //obtencion retorno
 			gen.AddExpression("P", "P", size, "-")          //regreso del entorno
-			gen.AddPrintf("c", "10")                        //salto de linea
+			gen.AddPrintf("c", "32")                        //salto de linea
 			gen.AddBr()
-		} else if result.Type == environment.NULL{
+		} else if result.Type == environment.NULL {
 			gen.AddPrintf("c", "(char)110")
 			gen.AddPrintf("c", "(char)105")
 			gen.AddPrintf("c", "(char)108")
-			gen.AddPrintf("c", "10")
+			gen.AddPrintf("c", "32")
 			gen.AddBr()
 		}
 	}
-
+	gen.AddPrintf("c", "10")
 	return environment.Value{}
 }

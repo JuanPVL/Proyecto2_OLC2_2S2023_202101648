@@ -31,7 +31,7 @@ func (p DeclaracionMatriz) Ejecutar(ast *environment.AST, env interface{},gen *g
 	result = p.Expresion.Ejecutar(ast, env, gen)
 	gen.AddComment("Agregando una declaracion")
 	if result.Type == environment.ARRAY {
-		newVar = env.(environment.Environment).SaveArrayVariable(p.Id,linea,columna, environment.INTEGER, len(result.ArrValue),ast)
+		newVar = env.(environment.Environment).SaveArrayVariable(p.Id,linea,columna, environment.ARRAY, len(result.ArrValue),ast)
 		fmt.Println("newVar: ", newVar)
 		gen.AddComment("Iniciando la declaración de un ARRAY")
 		p.ArrayValidation(ast, env, gen, result.ArrValue)

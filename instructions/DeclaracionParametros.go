@@ -18,6 +18,6 @@ func NewDeclaracionParametros(lin int, col int, id string, tipo environment.Tipo
 
 func(p DeclaracionParametros) Ejecutar(ast *environment.AST, env interface{},gen *generator.Generator) environment.Value {
 	var result environment.Value
-	result = environment.NewValue(p.Id, false, p.Tipo)
+	result = environment.NewValue(p.Id, false, p.Tipo, false, false, false)
 	return result
 }
