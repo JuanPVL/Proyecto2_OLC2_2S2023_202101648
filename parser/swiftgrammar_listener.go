@@ -73,9 +73,6 @@ type SwiftGrammarListener interface {
 	// EnterTypesmatriz is called when entering the typesmatriz production.
 	EnterTypesmatriz(c *TypesmatrizContext)
 
-	// EnterExprFor is called when entering the exprFor production.
-	EnterExprFor(c *ExprForContext)
-
 	// EnterExpr is called when entering the expr production.
 	EnterExpr(c *ExprContext)
 
@@ -168,9 +165,6 @@ type SwiftGrammarListener interface {
 
 	// ExitTypesmatriz is called when exiting the typesmatriz production.
 	ExitTypesmatriz(c *TypesmatrizContext)
-
-	// ExitExprFor is called when exiting the exprFor production.
-	ExitExprFor(c *ExprForContext)
 
 	// ExitExpr is called when exiting the expr production.
 	ExitExpr(c *ExprContext)

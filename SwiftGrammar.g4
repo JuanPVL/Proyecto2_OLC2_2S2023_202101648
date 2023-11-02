@@ -148,7 +148,8 @@ switchstmt returns [interfaces.Instruction sw]
 ;
 
 forstmt returns [interfaces.Instruction forinst]
-: FOR ID IN exprFor LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, $exprFor.e, $block.blk)}
+: FOR ID IN range1=expr PUNTO PUNTO PUNTO range2=expr LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, $range1.e,$range2.e, $block.blk)}
+| FOR ID IN expr LLAVE_IZQ block LLAVE_DER {$forinst = instructions.NewFor($FOR.line, $FOR.pos, $ID.text, nil,$expr.e, $block.blk)}
 ;
 
 declarationstmt returns [interfaces.Instruction dec]
@@ -227,10 +228,10 @@ typesmatriz returns[[]interface{} tm]
         }
 ;
 
-exprFor returns[interfaces.Expression e]
-:range1=expr PUNTO PUNTO PUNTO range2=expr {$e = expressions.NewForRange($range1.start.GetLine(), $range1.start.GetColumn(), $range1.e, $range2.e)}
-|expr {$e = $expr.e}
-;
+// exprFor returns[interfaces.Expression e]
+// :range1=expr PUNTO PUNTO PUNTO range2=expr {$e = expressions.NewForRange($range1.start.GetLine(), $range1.start.GetColumn(), $range1.e, $range2.e)}
+// |expr {$e = $expr.e}
+// ;
 
 expr returns [interfaces.Expression e]
 : RES left=expr { $e = expressions.NewOperation($RES.line, $RES.pos, $left.e, "UNARIO", nil) }

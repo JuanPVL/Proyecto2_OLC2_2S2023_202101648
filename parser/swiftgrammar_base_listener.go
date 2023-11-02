@@ -152,12 +152,6 @@ func (s *BaseSwiftGrammarListener) EnterTypesmatriz(ctx *TypesmatrizContext) {}
 // ExitTypesmatriz is called when production typesmatriz is exited.
 func (s *BaseSwiftGrammarListener) ExitTypesmatriz(ctx *TypesmatrizContext) {}
 
-// EnterExprFor is called when production exprFor is entered.
-func (s *BaseSwiftGrammarListener) EnterExprFor(ctx *ExprForContext) {}
-
-// ExitExprFor is called when production exprFor is exited.
-func (s *BaseSwiftGrammarListener) ExitExprFor(ctx *ExprForContext) {}
-
 // EnterExpr is called when production expr is entered.
 func (s *BaseSwiftGrammarListener) EnterExpr(ctx *ExprContext) {}
 

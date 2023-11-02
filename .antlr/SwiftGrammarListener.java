@@ -114,6 +114,46 @@ public interface SwiftGrammarListener extends ParseTreeListener {
 	 */
 	void exitGuardstmt(SwiftGrammarParser.GuardstmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SwiftGrammarParser#listcases}.
+	 * @param ctx the parse tree
+	 */
+	void enterListcases(SwiftGrammarParser.ListcasesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SwiftGrammarParser#listcases}.
+	 * @param ctx the parse tree
+	 */
+	void exitListcases(SwiftGrammarParser.ListcasesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SwiftGrammarParser#casestmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCasestmt(SwiftGrammarParser.CasestmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SwiftGrammarParser#casestmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCasestmt(SwiftGrammarParser.CasestmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SwiftGrammarParser#instdefault}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstdefault(SwiftGrammarParser.InstdefaultContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SwiftGrammarParser#instdefault}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstdefault(SwiftGrammarParser.InstdefaultContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SwiftGrammarParser#switchstmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitchstmt(SwiftGrammarParser.SwitchstmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SwiftGrammarParser#switchstmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitchstmt(SwiftGrammarParser.SwitchstmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SwiftGrammarParser#forstmt}.
 	 * @param ctx the parse tree
 	 */
